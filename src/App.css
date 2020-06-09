@@ -1,5 +1,22 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 
 .App {
   text-align: center;
+}
+
+.mainContent {
+  padding: "0 50px";
+}
+
+.footer {
+  text-align: center;
+}
+
+.header {
+  background: white;
+  width: 100%;
+  z-index: 1;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  top: 0;
 }
