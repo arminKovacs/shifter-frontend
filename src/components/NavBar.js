@@ -1,61 +1,49 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import LeftMenu from "./LeftMenu";
 import RightMenu from "./RightMenu";
 import { Drawer, Button } from "antd";
-import Icon from "@ant-design/icons";
+import { MenuOutlined } from "@ant-design/icons";
 import "../Navbar.css";
 
-class Navbar extends Component {
-  state = {
-    visible: false,
+export default function NavBar() {
+  let [visible, setVisible] = useState(false);
+
+  let showDrawer = () => {
+    setVisible(true);
   };
 
-  showDrawer = () => {
-    this.setState({
-      visible: true,
-    });
+  let onClose = () => {
+    setVisible(false);
   };
 
-  onClose = () => {
-    this.setState({
-      visible: false,
-    });
-  };
-
-  render() {
-    return (
-      <nav className="menu">
-        <div className="menu__logo">
+  return (
+    <nav className="menu">
+      <div className="menu__logo">Logo here</div>
+      <div className="menu__container">
+        <div className="menu_left">
+          <LeftMenu modeProp={"horizontal"} />
         </div>
-        <div className="menu__container">
-          <div className="menu_left">
-            <LeftMenu mode="horizontal" />
-          </div>
-          <div className="menu_rigth">
-            <RightMenu mode="horizontal" />
-          </div>
-          <Button
-            className="menu__mobile-button"
-            type="primary"
-            onClick={this.showDrawer}
-          >
-            <Icon type="align-right" />
-          </Button>
-          <Drawer
-            title="Basic Drawer"
-            placement="right"
-            className="menu_drawer"
-            closable={false}
-            onClose={this.onClose}
-            visible={this.state.visible}
-          >
-            <LeftMenu mode="inline" />
-            <RightMenu mode="inline" />
-          </Drawer>
+        <div className="menu_rigth">
+          <RightMenu modeProp={"horizontal"} />
         </div>
-      </nav>
-    );
-  }
+        <Button
+          className="menu__mobile-button"
+          type="primary"
+          onClick={showDrawer}
+          icon={<MenuOutlined />}
+        ></Button>
+        <Drawer
+          title="Menu"
+          placement="right"
+          className="menu_drawer"
+          closable={false}
+          onClose={onClose}
+          visible={visible}
+        >
+          <LeftMenu modeProp={"inline"} />
+          <RightMenu modeProp={"inline"} />
+        </Drawer>
+      </div>
+    </nav>
+  );
 }
-
-export default Navbar;
