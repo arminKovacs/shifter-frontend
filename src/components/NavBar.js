@@ -18,7 +18,7 @@ export default function NavBar() {
 
   return (
     <nav className="menu">
-      <div className="menu__logo">Logo here</div>
+      <div className="menu__logo"></div>
       <div className="menu__container">
         <div className="menu_left">
           <LeftMenu modeProp={"horizontal"} />

@@ -6,8 +6,8 @@ export default function RightMenu(props) {
 
   return (
     <Menu mode={modeState}>
-      <Menu.Item key="mail">Signin</Menu.Item>
-      <Menu.Item key="app">Signup</Menu.Item>
+      <Menu.Item key="signin">Signin</Menu.Item>
+      <Menu.Item key="signup">Signup</Menu.Item>
     </Menu>
   );
 }

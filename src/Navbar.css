@@ -8,14 +8,14 @@
 }
 
 .menu__logo {
+  background-image: url(./images/logo.png);
+  background-repeat: no-repeat;
+  background-size: contain;
   width: 150px;
   float: left;
-}
-
-.menu__logo a {
   display: inline-block;
-  font-size: 20px;
   padding: 19px 20px;
+
 }
 
 .menu__container .ant-menu-item {
@@ -72,14 +72,11 @@
 
   .menu__logo a {
     margin-left: -20px;
+    padding: 10px 20px;
   }
 
   .menu__container .ant-menu-item,
   .menu__container .ant-menu-submenu-title {
     padding: 1px 20px;
-  }
-
-  .menu__logo a {
-    padding: 10px 20px;
   }
 }

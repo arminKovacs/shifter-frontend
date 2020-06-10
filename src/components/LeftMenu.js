@@ -6,8 +6,10 @@ export default function LeftMenu(props) {
   
   return (
     <Menu mode={modeState}>
-      <Menu.Item key="mail">Home</Menu.Item>
-      <Menu.Item key="alipay">Shifts</Menu.Item>
+      <Menu.Item key="home">Home</Menu.Item>
+      <Menu.Item key="shifts">Shifts</Menu.Item>
+      <Menu.Item key="holidays">Holidays</Menu.Item>
+      <Menu.Item key="requests">Requests</Menu.Item>
     </Menu>
   );
 }
