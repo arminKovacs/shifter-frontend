@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LeftMenu from "./LeftMenu";
 import RightMenu from "./RightMenu";
-import { Drawer, Button } from "antd";
+import { Drawer, Button, Divider } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import "../Navbar.css";
 
@@ -41,6 +41,7 @@ export default function NavBar() {
           visible={visible}
         >
           <LeftMenu modeProp={"inline"} />
+          <Divider/>
           <RightMenu modeProp={"inline"} />
         </Drawer>
       </div>
