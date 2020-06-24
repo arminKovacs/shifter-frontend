@@ -8,10 +8,10 @@ export default function RightMenu(props) {
   return (
     <Menu mode={modeState} selectedKeys={0}>
       <Menu.Item key="signin" component={Link} to="/signin">
-        Signin
+        <Link to="/signin">Signin</Link>
       </Menu.Item>
       <Menu.Item key="signup" component={Link} to="/signup">
-        Signup
+        <Link to="/signup">Signup</Link>
       </Menu.Item>
     </Menu>
   );

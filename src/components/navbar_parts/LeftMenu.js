@@ -7,17 +7,17 @@ export default function LeftMenu(props) {
 
   return (
     <Menu mode={modeState} selectedKeys={0}>
-      <Menu.Item key="home" component={Link} to="/">
-        Home
+      <Menu.Item key="home">
+        <Link to="/">Home</Link>
       </Menu.Item>
-      <Menu.Item key="planner" component={Link} to="/planner">
-        Planner
+      <Menu.Item key="planner">
+        <Link to="/planner">Planner</Link>
       </Menu.Item>
-      <Menu.Item key="shifts" component={Link} to="/shifts">
-        Shifts
+      <Menu.Item key="shifts">
+        <Link to="/shifts">Shifts</Link>
       </Menu.Item>
-      <Menu.Item key="requests" component={Link} to="/requests">
-        Requests
+      <Menu.Item key="requests">
+        <Link to="/requests">Requests</Link>
       </Menu.Item>
     </Menu>
   );
