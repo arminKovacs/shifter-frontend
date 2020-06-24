@@ -3,7 +3,7 @@ import LeftMenu from "./LeftMenu";
 import RightMenu from "./RightMenu";
 import { Drawer, Button, Divider } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import "../Navbar.css";
+import "../../css/Navbar.css";
 
 export default function NavBar() {
   let [visible, setVisible] = useState(false);

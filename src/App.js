@@ -1,11 +1,11 @@
 import React from "react";
-import "./App.css";
-import NavBar from "./components/NavBar";
+import "./css/App.css";
+import NavBar from "./components/navbar_parts/NavBar";
 import { Route, BrowserRouter as Router } from "react-router-dom";
-import Home from "./components/Home"
-import Planner from "./components/Planner"
-import Shifts from "./components/Shifts"
-import Requests from "./components/Requests"
+import Home from "./components/main/Home"
+import Planner from "./components/main/Planner"
+import Shifts from "./components/main/Shifts"
+import Requests from "./components/main/Requests"
 
 function App() {
   return (
