@@ -10,9 +10,6 @@ export default function LeftMenu(props) {
       <Menu.Item key="home">
         <Link to="/">Home</Link>
       </Menu.Item>
-      <Menu.Item key="planner">
-        <Link to="/planner">Planner</Link>
-      </Menu.Item>
       <Menu.Item key="shifts">
         <Link to="/shifts">Shifts</Link>
       </Menu.Item>

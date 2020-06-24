@@ -1,0 +1,5 @@
+@import '~antd/dist/antd.css';
+
+.ant-picker-calendar-header .ant-picker-calendar-mode-switch{
+    display: none;
+}
