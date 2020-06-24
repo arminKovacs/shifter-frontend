@@ -24,8 +24,8 @@
   width: 150px;
   float: left;
   display: inline-block;
-  padding: 19px 20px;
-
+  padding: 19px;
+  margin-top: 2px;
 }
 
 .menu__container .ant-menu-item {
