@@ -1,7 +1,6 @@
 import "../../css/Form.css";
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 export default function Signin() {
   const onFinish = (values) => {
@@ -10,7 +9,7 @@ export default function Signin() {
 
   return (
     <div className="data-form">
-      <h1>Signin</h1>
+      <div id="signin-logo"></div>
       <Form
         name="normal_login"
         className="login-form"
@@ -27,11 +26,9 @@ export default function Signin() {
               message: "Please input your Username!",
             },
           ]}
+          label="Username"
         >
-          <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Username"
-          />
+          <Input placeholder="Username" />
         </Form.Item>
         <Form.Item
           name="password"
@@ -41,12 +38,9 @@ export default function Signin() {
               message: "Please input your Password!",
             },
           ]}
+          label="Password"
         >
-          <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
-            placeholder="Password"
-          />
+          <Input type="password" placeholder="Password" />
         </Form.Item>
         <Form.Item>
           <Form.Item name="remember" valuePropName="checked" noStyle>
@@ -64,7 +58,7 @@ export default function Signin() {
             htmlType="submit"
             className="login-form-button"
           >
-            Log in
+            Sign in
           </Button>
           Or <a href="">register now!</a>
         </Form.Item>
