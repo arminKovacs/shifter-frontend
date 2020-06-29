@@ -41,7 +41,7 @@ export default function Signup() {
 
   return (
     <div className="data-form">
-      <h1>Signup</h1>
+      <div id="signup-logo"></div>
       <Form
         {...formItemLayout}
         form={form}
