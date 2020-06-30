@@ -1,6 +1,7 @@
 import "../../css/Form.css";
 import React from "react";
 import { Form, Input, Checkbox, Button } from "antd";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
   const formItemLayout = {
@@ -133,7 +134,7 @@ export default function Signup() {
           {...tailFormItemLayout}
         >
           <Checkbox>
-            I have read the <a href="">agreement</a>
+            I have read the <Link to="/">agreement</Link>
           </Checkbox>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>

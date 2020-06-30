@@ -1,6 +1,7 @@
 import "../../css/Form.css";
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
+import { Link } from "react-router-dom";
 
 export default function Signin() {
   const onFinish = (values) => {
@@ -46,10 +47,9 @@ export default function Signin() {
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
-
-          <a className="login-form-forgot" href="">
+          <Link className="login-form-forgot" to="/">
             Forgot password
-          </a>
+          </Link>
         </Form.Item>
 
         <Form.Item>
@@ -60,7 +60,7 @@ export default function Signin() {
           >
             Sign in
           </Button>
-          Or <a href="">register now!</a>
+          Or <Link to="/signup">register now</Link>
         </Form.Item>
       </Form>
     </div>

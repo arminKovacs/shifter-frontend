@@ -13,7 +13,7 @@ import "../../css/Shifts.css";
 export default function Shifts() {
   const { RangePicker } = DatePicker;
 
-  const menu = (
+  const workers = (
     <Menu>
       <Menu.Item key="1" icon={<UserOutlined />}>
         Vágási Feri
@@ -27,7 +27,7 @@ export default function Shifts() {
     </Menu>
   );
 
-  const shiftMenu = (
+  const shiftTypes = (
     <Menu>
       <Menu.Item key="shift1" icon={<ClockCircleOutlined />}>
         Morning shift 06:00 - 14:00
@@ -46,13 +46,13 @@ export default function Shifts() {
 
   return (
     <div>
-      <Dropdown overlay={menu} className="person-dropdown">
+      <Dropdown overlay={workers} className="person-dropdown">
         <Button>
           Choose a person <DownOutlined />
         </Button>
       </Dropdown>
       <RangePicker className="work-time" />
-      <Dropdown overlay={shiftMenu} className="shift-dropdown">
+      <Dropdown overlay={shiftTypes} className="shift-dropdown">
         <Button>
           Shift <DownOutlined />
         </Button>
