@@ -2,11 +2,11 @@ import React from "react";
 import "./css/App.css";
 import NavBar from "./components/navbar_parts/NavBar";
 import { Route, BrowserRouter as Router } from "react-router-dom";
-import Home from "./components/main/Home";
-import Shifts from "./components/main/Shifts";
-import Requests from "./components/main/Requests";
-import Signin from "./components/main/Signin";
-import Signup from "./components/main/Signup";
+import Home from "./components/pages/Home";
+import Shifts from "./components/pages/Shifts";
+import Requests from "./components/pages/Requests";
+import Signin from "./components/pages/Signin";
+import Signup from "./components/pages/Signup";
 import { WorkerProvider } from "./components/context/WorkerContext";
 import { ShiftProvider } from "./components/context/ShiftContext";
 

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Calendar } from "@fullcalendar/react";
+import DisplayCalendar from "../DisplayCalendar"
 import { WorkerContext } from "../context/WorkerContext";
 import { ShiftContext } from "../context/ShiftContext";
 import { Menu, Dropdown, Button, Divider, DatePicker } from "antd";
@@ -74,7 +74,7 @@ export default function Shifts() {
         className="check-button"
       />
       <Divider />
-      <Calendar />
+      <DisplayCalendar/>
     </div>
   );
 }
