@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react";
+import { Calendar } from "@fullcalendar/react";
 import { WorkerContext } from "../context/WorkerContext";
 import { ShiftContext } from "../context/ShiftContext";
-import { Calendar } from "antd";
-import { DatePicker } from "antd";
-import { Menu, Dropdown, Button, Divider } from "antd";
+import { Menu, Dropdown, Button, Divider, DatePicker } from "antd";
 import {
   DownOutlined,
   UserOutlined,

@@ -9,9 +9,9 @@ export const ShiftProvider = (props) => {
   useEffect(() => {
     //Axios goes here
     setShifts([
-      { name: "Morning shfit", time: "06:00 - 14:00" },
-      { name: "Afternoon shfit", time: "14:00 - 22:00" },
-      { name: "Night shfit", time: "22:00 - 06:00" }
+      { name: "Morning shift", time: "06:00 - 14:00" },
+      { name: "Afternoon shift", time: "14:00 - 22:00" },
+      { name: "Night shift", time: "22:00 - 06:00" }
     ]);
   }, []);
 
