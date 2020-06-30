@@ -2,7 +2,7 @@ import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/resource-daygrid";
-import '../css/DisplayCalendar.css'
+import "../css/DisplayCalendar.css";
 
 export default function DisplayCalendar() {
   return (
@@ -14,6 +14,7 @@ export default function DisplayCalendar() {
         center: "title",
         right: "dayGridMonth,timeGridWeek,timeGridDay",
       }}
+      allDaySlot={false}
       events={[
         {
           className: "event-text",

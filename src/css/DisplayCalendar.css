@@ -1,3 +1,15 @@
-.event-text{
-    font-size: large;
+.event-text {
+  font-size: large;
+}
+
+@media (max-width: 620px) {
+  .fc .fc-toolbar {
+    display: inline-block;
+    margin: auto;
+    transform: scale(0.8, 0.8);
+    -ms-transform: scale(0.8, 0.8); 
+    -webkit-transform: scale(0.8, 0.8); 
+    -o-transform: scale(0.8, 0.8); 
+    -moz-transform: scale(0.8, 0.8); 
+  }
 }
