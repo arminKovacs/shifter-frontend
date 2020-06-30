@@ -40,9 +40,9 @@ export default function NavBar() {
           onClose={onClose}
           visible={visible}
         >
-          <LeftMenu modeProp={"inline"} />
+          <LeftMenu modeProp={"inline"} onClose={onClose}/>
           <Divider/>
-          <RightMenu modeProp={"inline"} />
+          <RightMenu modeProp={"inline"} onClose={onClose}/>
         </Drawer>
       </div>
     </nav>
