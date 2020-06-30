@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { WorkerContext } from "../context/WorkerContext";
 import { ShiftContext } from "../context/ShiftContext";
 import { Calendar } from "antd";
@@ -16,11 +16,25 @@ export default function Shifts() {
   const { RangePicker } = DatePicker;
   let { workers } = useContext(WorkerContext);
   let { shifts } = useContext(ShiftContext);
+  let [chosenWorker, setChosenWorker] = useState("Choose a person");
+  let [chosenShift, setChosenShift] = useState("Shift");
+
+  let switchToChosenName = (name) => {
+    setChosenWorker(name);
+  };
+
+  let switchToChosenShift = (shift) => {
+    setChosenShift(shift);
+  };
 
   let workersList = (
     <Menu>
       {workers.map((worker) => (
-        <Menu.Item key="1" icon={<UserOutlined />}>
+        <Menu.Item
+          key="1"
+          icon={<UserOutlined />}
+          onClick={() => switchToChosenName(worker.name)}
+        >
           {worker.name}
         </Menu.Item>
       ))}
@@ -30,7 +44,11 @@ export default function Shifts() {
   let shiftTypes = (
     <Menu>
       {shifts.map((shift) => (
-        <Menu.Item key="shift1" icon={<ClockCircleOutlined />}>
+        <Menu.Item
+          key="shift1"
+          icon={<ClockCircleOutlined />}
+          onClick={() => switchToChosenShift(shift.name)}
+        >
           {shift.name} - {shift.time}
         </Menu.Item>
       ))}
@@ -41,13 +59,13 @@ export default function Shifts() {
     <div>
       <Dropdown overlay={workersList} className="person-dropdown">
         <Button>
-          Choose a person <DownOutlined />
+          {chosenWorker} <DownOutlined />
         </Button>
       </Dropdown>
       <RangePicker className="work-time" />
       <Dropdown overlay={shiftTypes} className="shift-dropdown">
         <Button>
-          Shift <DownOutlined />
+          {chosenShift} <DownOutlined />
         </Button>
       </Dropdown>
       <Button
