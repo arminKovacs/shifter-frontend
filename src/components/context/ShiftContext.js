@@ -4,15 +4,15 @@ import React, { useState, useEffect, createContext } from "react";
 export const ShiftContext = createContext();
 
 export const ShiftProvider = (props) => {
-  const [shifts, setShifts] = useState([]);
+  let [shifts, setShifts] = useState([]);
 
   useEffect(() => {
     //Axios goes here
-    setShifts(
-      { shiftName: "Morning shfit", shiftTime: "06:00 - 14:00" },
-      { shiftName: "Afternoon shfit", shiftTime: "14:00 - 22:00" },
-      { shiftName: "Night shfit", shiftTime: "22:00 - 06:00" }
-    );
+    setShifts([
+      { name: "Morning shfit", time: "06:00 - 14:00" },
+      { name: "Afternoon shfit", time: "14:00 - 22:00" },
+      { name: "Night shfit", time: "22:00 - 06:00" }
+    ]);
   }, []);
 
   return (

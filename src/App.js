@@ -7,20 +7,26 @@ import Shifts from "./components/main/Shifts";
 import Requests from "./components/main/Requests";
 import Signin from "./components/main/Signin";
 import Signup from "./components/main/Signup";
+import { WorkerProvider } from "./components/context/WorkerContext";
+import { ShiftProvider } from "./components/context/ShiftContext";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <NavBar />
-        <div className="pageBody">
-          <Route exact path="/" component={Home} />
-          <Route path="/shifts" component={Shifts} />
-          <Route path="/requests" component={Requests} />
-          <Route path="/signin" component={Signin} />
-          <Route path="/signup" component={Signup} />
-        </div>
-      </Router>
+      <WorkerProvider>
+        <ShiftProvider>
+          <Router>
+            <NavBar />
+            <div className="pageBody">
+              <Route exact path="/" component={Home} />
+              <Route path="/shifts" component={Shifts} />
+              <Route path="/requests" component={Requests} />
+              <Route path="/signin" component={Signin} />
+              <Route path="/signup" component={Signup} />
+            </div>
+          </Router>
+        </ShiftProvider>
+      </WorkerProvider>
     </div>
   );
 }

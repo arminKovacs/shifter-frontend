@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { WorkerContext } from "../context/WorkerContext";
+import { ShiftContext } from "../context/ShiftContext";
 import { Calendar } from "antd";
 import { DatePicker } from "antd";
 import { Menu, Dropdown, Button, Divider } from "antd";
@@ -12,41 +14,32 @@ import "../../css/Shifts.css";
 
 export default function Shifts() {
   const { RangePicker } = DatePicker;
+  let { workers } = useContext(WorkerContext);
+  let { shifts } = useContext(ShiftContext);
 
-  const workers = (
+  let workersList = (
     <Menu>
-      <Menu.Item key="1" icon={<UserOutlined />}>
-        Vágási Feri
-      </Menu.Item>
-      <Menu.Item key="2" icon={<UserOutlined />}>
-        Taki bá
-      </Menu.Item>
-      <Menu.Item key="3" icon={<UserOutlined />}>
-        Gábor Gábor
-      </Menu.Item>
+      {workers.map((worker) => (
+        <Menu.Item key="1" icon={<UserOutlined />}>
+          {worker.name}
+        </Menu.Item>
+      ))}
     </Menu>
   );
 
-  const shiftTypes = (
+  let shiftTypes = (
     <Menu>
-      <Menu.Item key="shift1" icon={<ClockCircleOutlined />}>
-        Morning shift 06:00 - 14:00
-      </Menu.Item>
-      <Menu.Item key="shift2" icon={<ClockCircleOutlined />}>
-        Afternoon shift 14:00 - 22:00
-      </Menu.Item>
-      <Menu.Item key="shift3" icon={<ClockCircleOutlined />}>
-        Night shift 22:00 - 06:00
-      </Menu.Item>
-      <Menu.Item key="shift4" icon={<ClockCircleOutlined />}>
-        Holiday
-      </Menu.Item>
+      {shifts.map((shift) => (
+        <Menu.Item key="shift1" icon={<ClockCircleOutlined />}>
+          {shift.name} - {shift.time}
+        </Menu.Item>
+      ))}
     </Menu>
   );
 
   return (
     <div>
-      <Dropdown overlay={workers} className="person-dropdown">
+      <Dropdown overlay={workersList} className="person-dropdown">
         <Button>
           Choose a person <DownOutlined />
         </Button>
@@ -63,8 +56,8 @@ export default function Shifts() {
         icon={<CheckOutlined />}
         className="check-button"
       />
-      <Divider/>
-      <Calendar/>
+      <Divider />
+      <Calendar />
     </div>
   );
 }
