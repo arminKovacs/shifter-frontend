@@ -1,20 +1,16 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
-import { WorkerShiftContext } from "../context/WorkerShiftContext";
+import React, { useState, createContext, useContext } from "react";
+import { WorkerShiftContext } from "./WorkerShiftContext";
 import axios from "axios";
 
 export const AssignShiftContext = createContext();
 
-export default function AssignShiftProvider(props) {
-  let [shiftAssignmentDetails, setShiftAssignmentDetails] = useState({
-    workerId: "",
-    shiftId: "",
-    startDate: "",
-    endDate: ""
-  });
+export const AssignShiftProvider = (props) => {
+  let [shiftAssignmentDetails, setShiftAssignmentDetails] = useState();
 
-  let { setWorkerShifts } = useContext(WorkerShiftContext);
+  let {setWorkerShifts} = useContext(WorkerShiftContext);
 
   const postShiftAssignment = () => {
+    console.log(shiftAssignmentDetails);
     axios
       .post("http://localhost:8080/assign-shift", {
         shiftAssignmentDetails,
@@ -31,6 +27,8 @@ export default function AssignShiftProvider(props) {
         setShiftAssignmentDetails,
         postShiftAssignment,
       }}
-    ></AssignShiftContext.Provider>
+    >
+      {props.children}
+    </AssignShiftContext.Provider>
   );
-}
+};

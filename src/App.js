@@ -10,16 +10,16 @@ import Signin from "./components/pages/Signin";
 import Signup from "./components/pages/Signup";
 import { WorkerProvider } from "./components/context/WorkerContext";
 import { ShiftProvider } from "./components/context/ShiftContext";
-import { WorkerShiftContext } from "./components/context/WorkerShiftContext";
-import { AssignShiftContext } from "./components/context/AssignShiftContext";
+import { WorkerShiftProvider } from "./components/context/WorkerShiftContext";
+import { AssignShiftProvider } from "./components/context/AssignShiftContext";
 
 function App() {
   return (
     <div className="App">
       <WorkerProvider>
         <ShiftProvider>
-          <WorkerShiftContext>
-            <AssignShiftContext>
+          <WorkerShiftProvider>
+            <AssignShiftProvider>
               <Router>
                 <NavBar />
                 <div className="pageBody">
@@ -31,8 +31,8 @@ function App() {
                   <Route path="/signup" component={Signup} />
                 </div>
               </Router>
-            </AssignShiftContext>
-          </WorkerShiftContext>
+            </AssignShiftProvider>
+          </WorkerShiftProvider>
         </ShiftProvider>
       </WorkerProvider>
     </div>

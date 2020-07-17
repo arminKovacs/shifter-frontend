@@ -1,6 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
-import { WorkerContext } from "./WorkerContext";
 
 export const WorkerShiftContext = createContext();
 
@@ -14,8 +13,8 @@ export const WorkerShiftProvider = (props) => {
   }, []);
 
   return (
-    <WorkerContext.Provider value={{ workerShifts, setWorkerShifts }}>
+    <WorkerShiftContext.Provider value={{ workerShifts, setWorkerShifts }}>
       {props.children}
-    </WorkerContext.Provider>
+    </WorkerShiftContext.Provider>
   );
 };

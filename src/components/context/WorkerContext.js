@@ -6,7 +6,7 @@ export const WorkerContext = createContext();
 export const WorkerProvider = (props) => {
   let [workers, setWorkers] = useState([]);
 
-  useEffect(() => {
+  useEffect((workers) => {
     axios.get("http://localhost:8080/users").then((response) => {
       setWorkers(response.data);
     });

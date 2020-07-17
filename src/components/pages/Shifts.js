@@ -16,9 +16,10 @@ export default function Shifts() {
   const { RangePicker } = DatePicker;
   let { workers } = useContext(WorkerContext);
   let { shifts } = useContext(ShiftContext);
-  let [setShiftAssignmentDetails, postShiftAssignment] = useContext(
-    AssignShiftContext
-  );
+  let {
+    shiftAssignmentDetails,
+    setShiftAssignmentDetails,
+    postShiftAssignment  } = useContext(AssignShiftContext);
 
   let [displayWorker, setDisplayWorker] = useState("Choose a person");
   let [displayShift, setDisplayShift] = useState("Shift");
@@ -47,20 +48,23 @@ export default function Shifts() {
       startDate: chosenDate.startDate,
       endDate: chosenDate.endDate,
     });
+    console.log(shiftAssignmentDetails);
     postShiftAssignment();
   };
 
   let workersList = (
     <Menu>
-      {workers.map((worker) => (
-        <Menu.Item
-          key={"worker" + worker.id}
-          icon={<UserOutlined />}
-          onClick={() => chooseWorker(worker)}
-        >
-          {worker.firstName + " " + worker.lastName}
-        </Menu.Item>
-      ))}
+      {workers === undefined
+        ? "No workers added yet"
+        : workers.map((worker) => (
+            <Menu.Item
+              key={"worker" + worker.id}
+              icon={<UserOutlined />}
+              onClick={() => chooseWorker(worker)}
+            >
+              {worker.firstName + " " + worker.lastName}
+            </Menu.Item>
+          ))}
     </Menu>
   );
 
