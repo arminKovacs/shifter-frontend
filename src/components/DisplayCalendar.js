@@ -15,26 +15,26 @@ export default function DisplayCalendar() {
         right: "dayGridMonth,timeGridWeek,timeGridDay",
       }}
       allDaySlot={false}
-      forceEventDuration={true}
-      defaultTimedEventDuration='08:00:00'
       events={[
         {
           className: "event-text",
           title: "test",
           start: "2020-07-01T06:00:00",
+          end: "2020-07-01T14:00:00",
           color: "yellow",
           textColor: "black",
-          allDay: false
         },
         {
           className: "event-text",
           title: "test2",
           start: "2020-07-01T14:00:00",
+          end: "2020-07-01T22:00:00",
         },
         {
           className: "event-text",
           title: "test3",
           start: "2020-07-01T10:00:00",
+          end: "2020-07-01T16:00:00",
           color: "green",
         },
       ]}

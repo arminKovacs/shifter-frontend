@@ -15,26 +15,26 @@ export default function Shifts() {
   const { RangePicker } = DatePicker;
   let { workers } = useContext(WorkerContext);
   let { shifts } = useContext(ShiftContext);
-  let [chosenWorker, setChosenWorker] = useState("Choose a person");
-  let [chosenShift, setChosenShift] = useState("Shift");
+  let [displayWorker, setDisplayWorker] = useState("Choose a person");
+  let [displayShift, setDisplayShift] = useState("Shift");
 
-  let switchToChosenName = (name) => {
-    setChosenWorker(name);
+  let chooseWorker = (worker) => {
+    setDisplayWorker(worker.firstName + " " + worker.lastName);
   };
 
   let switchToChosenShift = (shift) => {
-    setChosenShift(shift);
+    setDisplayShift(shift);
   };
 
   let workersList = (
     <Menu>
       {workers.map((worker) => (
         <Menu.Item
-          key="1"
+          key={"worker" + worker.id}
           icon={<UserOutlined />}
-          onClick={() => switchToChosenName(worker.name)}
+          onClick={() => chooseWorker(worker)}
         >
-          {worker.name}
+          {worker.firstName + " " + worker.lastName}
         </Menu.Item>
       ))}
     </Menu>
@@ -58,13 +58,13 @@ export default function Shifts() {
     <div>
       <Dropdown overlay={workersList} className="person-dropdown">
         <Button>
-          {chosenWorker} <DownOutlined />
+          {displayWorker} <DownOutlined />
         </Button>
       </Dropdown>
       <RangePicker className="work-time" />
       <Dropdown overlay={shiftTypes} className="shift-dropdown">
         <Button>
-          {chosenShift} <DownOutlined />
+          {displayShift} <DownOutlined />
         </Button>
       </Dropdown>
       <Button
