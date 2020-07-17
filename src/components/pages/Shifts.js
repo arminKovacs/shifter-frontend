@@ -44,11 +44,11 @@ export default function Shifts() {
     <Menu>
       {shifts.map((shift) => (
         <Menu.Item
-          key="shift1"
+          key={"shift" + shift.id}
           icon={<ClockCircleOutlined />}
           onClick={() => switchToChosenShift(shift.name)}
         >
-          {shift.name} - {shift.time}
+          {shift.name}: {shift.startTime}-{shift.endTime}
         </Menu.Item>
       ))}
     </Menu>

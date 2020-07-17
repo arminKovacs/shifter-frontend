@@ -9,7 +9,6 @@ export const WorkerProvider = (props) => {
   useEffect(() => {
     axios.get("http://localhost:8080/users").then((response) => {
       setWorkers(response.data);
-      console.log(response.data)
     });
   }, []);
 
