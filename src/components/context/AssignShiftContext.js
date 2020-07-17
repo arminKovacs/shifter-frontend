@@ -9,7 +9,7 @@ export default function AssignShiftProvider(props) {
     workerId: "",
     shiftId: "",
     startDate: "",
-    endDate: "",
+    endDate: ""
   });
 
   let { setWorkerShifts } = useContext(WorkerShiftContext);

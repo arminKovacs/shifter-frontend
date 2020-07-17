@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import DisplayCalendar from "../DisplayCalendar";
 import { WorkerContext } from "../context/WorkerContext";
 import { ShiftContext } from "../context/ShiftContext";
+import { AssignShiftContext } from "../context/AssignShiftContext";
 import { Menu, Dropdown, Button, Divider, DatePicker } from "antd";
 import {
   DownOutlined,
@@ -15,21 +16,38 @@ export default function Shifts() {
   const { RangePicker } = DatePicker;
   let { workers } = useContext(WorkerContext);
   let { shifts } = useContext(ShiftContext);
+  let [setShiftAssignmentDetails, postShiftAssignment] = useContext(
+    AssignShiftContext
+  );
+
   let [displayWorker, setDisplayWorker] = useState("Choose a person");
   let [displayShift, setDisplayShift] = useState("Shift");
-  
+  let [chosenWorker, setChosenWorker] = useState();
+  let [chosenShift, setChosenShift] = useState();
+  let [chosenDate, setChosenDate] = useState();
 
   const chooseWorker = (worker) => {
     setDisplayWorker(worker.firstName + " " + worker.lastName);
+    setChosenWorker(worker);
   };
 
   const switchToChosenShift = (shift) => {
     setDisplayShift(shift.name);
+    setChosenShift(shift);
   };
 
   const dateChange = (value, dateStrings) => {
-    console.log(dateStrings[0]);
-    console.log(dateStrings[1]);
+    setChosenDate({ startDate: dateStrings[0], endDate: dateStrings[1] });
+  };
+
+  const sendAssignmentDetails = () => {
+    setShiftAssignmentDetails({
+      workerId: chosenWorker.id,
+      shiftId: chosenShift.id,
+      startDate: chosenDate.startDate,
+      endDate: chosenDate.endDate,
+    });
+    postShiftAssignment();
   };
 
   let workersList = (
@@ -78,6 +96,7 @@ export default function Shifts() {
         shape="circle"
         icon={<CheckOutlined />}
         className="check-button"
+        onClick={sendAssignmentDetails}
       />
       <Divider />
       <DisplayCalendar />
