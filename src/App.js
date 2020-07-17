@@ -10,23 +10,29 @@ import Signin from "./components/pages/Signin";
 import Signup from "./components/pages/Signup";
 import { WorkerProvider } from "./components/context/WorkerContext";
 import { ShiftProvider } from "./components/context/ShiftContext";
+import { WorkerShiftContext } from "./components/context/WorkerShiftContext";
+import { AssignShiftContext } from "./components/context/AssignShiftContext";
 
 function App() {
   return (
     <div className="App">
       <WorkerProvider>
         <ShiftProvider>
-          <Router>
-            <NavBar />
-            <div className="pageBody">
-              <Route exact path="/" component={Home} />
-              <Route path="/shifts" component={Shifts} />
-              <Route path="/requests" component={Requests} />
-              <Route path="/request" component={Request} />
-              <Route path="/signin" component={Signin} />
-              <Route path="/signup" component={Signup} />
-            </div>
-          </Router>
+          <WorkerShiftContext>
+            <AssignShiftContext>
+              <Router>
+                <NavBar />
+                <div className="pageBody">
+                  <Route exact path="/" component={Home} />
+                  <Route path="/shifts" component={Shifts} />
+                  <Route path="/requests" component={Requests} />
+                  <Route path="/request" component={Request} />
+                  <Route path="/signin" component={Signin} />
+                  <Route path="/signup" component={Signup} />
+                </div>
+              </Router>
+            </AssignShiftContext>
+          </WorkerShiftContext>
         </ShiftProvider>
       </WorkerProvider>
     </div>

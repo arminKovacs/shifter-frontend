@@ -7,9 +7,8 @@ export const ShiftProvider = (props) => {
   let [shifts, setShifts] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/shifts").then((response) => {
+    axios.get("http://localhost:8080/shifts").then(response => {
       setShifts(response.data);
-      console.log(response.data);
     });
   }, []);
 

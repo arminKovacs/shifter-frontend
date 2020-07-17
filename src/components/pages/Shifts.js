@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import DisplayCalendar from "../DisplayCalendar"
+import DisplayCalendar from "../DisplayCalendar";
 import { WorkerContext } from "../context/WorkerContext";
 import { ShiftContext } from "../context/ShiftContext";
 import { Menu, Dropdown, Button, Divider, DatePicker } from "antd";
@@ -17,13 +17,19 @@ export default function Shifts() {
   let { shifts } = useContext(ShiftContext);
   let [displayWorker, setDisplayWorker] = useState("Choose a person");
   let [displayShift, setDisplayShift] = useState("Shift");
+  
 
-  let chooseWorker = (worker) => {
+  const chooseWorker = (worker) => {
     setDisplayWorker(worker.firstName + " " + worker.lastName);
   };
 
-  let switchToChosenShift = (shift) => {
-    setDisplayShift(shift);
+  const switchToChosenShift = (shift) => {
+    setDisplayShift(shift.name);
+  };
+
+  const dateChange = (value, dateStrings) => {
+    console.log(dateStrings[0]);
+    console.log(dateStrings[1]);
   };
 
   let workersList = (
@@ -46,7 +52,7 @@ export default function Shifts() {
         <Menu.Item
           key={"shift" + shift.id}
           icon={<ClockCircleOutlined />}
-          onClick={() => switchToChosenShift(shift.name)}
+          onClick={() => switchToChosenShift(shift)}
         >
           {shift.name}: {shift.startTime}-{shift.endTime}
         </Menu.Item>
@@ -61,7 +67,7 @@ export default function Shifts() {
           {displayWorker} <DownOutlined />
         </Button>
       </Dropdown>
-      <RangePicker className="work-time" />
+      <RangePicker className="work-time" onChange={dateChange} />
       <Dropdown overlay={shiftTypes} className="shift-dropdown">
         <Button>
           {displayShift} <DownOutlined />
@@ -74,7 +80,7 @@ export default function Shifts() {
         className="check-button"
       />
       <Divider />
-      <DisplayCalendar/>
+      <DisplayCalendar />
     </div>
   );
 }
