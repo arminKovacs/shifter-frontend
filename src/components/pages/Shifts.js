@@ -16,40 +16,26 @@ export default function Shifts() {
   const { RangePicker } = DatePicker;
   let { workers } = useContext(WorkerContext);
   let { shifts } = useContext(ShiftContext);
-  let {
-    shiftAssignmentDetails,
-    setShiftAssignmentDetails,
-    postShiftAssignment  } = useContext(AssignShiftContext);
+  let { shiftAssignmentDetails, postShiftAssignment } = useContext(
+    AssignShiftContext
+  );
 
   let [displayWorker, setDisplayWorker] = useState("Choose a person");
   let [displayShift, setDisplayShift] = useState("Shift");
-  let [chosenWorker, setChosenWorker] = useState();
-  let [chosenShift, setChosenShift] = useState();
-  let [chosenDate, setChosenDate] = useState();
 
   const chooseWorker = (worker) => {
     setDisplayWorker(worker.firstName + " " + worker.lastName);
-    setChosenWorker(worker);
+    shiftAssignmentDetails.workerId = worker.id;
   };
 
   const switchToChosenShift = (shift) => {
     setDisplayShift(shift.name);
-    setChosenShift(shift);
+    shiftAssignmentDetails.shiftId = shift.id;
   };
 
   const dateChange = (value, dateStrings) => {
-    setChosenDate({ startDate: dateStrings[0], endDate: dateStrings[1] });
-  };
-
-  const sendAssignmentDetails = () => {
-    setShiftAssignmentDetails({
-      workerId: chosenWorker.id,
-      shiftId: chosenShift.id,
-      startDate: chosenDate.startDate,
-      endDate: chosenDate.endDate,
-    });
-    console.log(shiftAssignmentDetails);
-    postShiftAssignment();
+    shiftAssignmentDetails.startDate = dateStrings[0];
+    shiftAssignmentDetails.endDate = dateStrings[1];
   };
 
   let workersList = (
@@ -100,7 +86,7 @@ export default function Shifts() {
         shape="circle"
         icon={<CheckOutlined />}
         className="check-button"
-        onClick={sendAssignmentDetails}
+        onClick={postShiftAssignment}
       />
       <Divider />
       <DisplayCalendar />

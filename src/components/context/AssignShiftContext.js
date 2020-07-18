@@ -5,15 +5,22 @@ import axios from "axios";
 export const AssignShiftContext = createContext();
 
 export const AssignShiftProvider = (props) => {
-  let [shiftAssignmentDetails, setShiftAssignmentDetails] = useState();
+  let [shiftAssignmentDetails, setShiftAssignmentDetails] = useState({
+    workerId: "",
+    shiftId: "",
+    startDate: "",
+    endDate: "",
+  });
 
-  let {setWorkerShifts} = useContext(WorkerShiftContext);
+  let { setWorkerShifts } = useContext(WorkerShiftContext);
 
   const postShiftAssignment = () => {
-    console.log(shiftAssignmentDetails);
     axios
       .post("http://localhost:8080/assign-shift", {
-        shiftAssignmentDetails,
+        workerId: shiftAssignmentDetails.workerId,
+        shiftId: shiftAssignmentDetails.shiftId,
+        startDate: shiftAssignmentDetails.startDate,
+        endDate: shiftAssignmentDetails.endDate,
       })
       .then((response) => {
         setWorkerShifts(response.data);
