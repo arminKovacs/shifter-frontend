@@ -21,6 +21,7 @@ export default function DisplayCalendar() {
         let shiftEnd = currentDate + "T" + workerShift.endTime;
 
         eventList.push({
+          id: workerShift.id,
           className: "event-text",
           title:
             workerShift.shifterUser.firstName +
@@ -35,8 +36,10 @@ export default function DisplayCalendar() {
       }
     }
     let calendarApi = calendarRef.current.getApi();
+    if (calendarApi.getEventSources()) {
+      calendarApi.removeAllEvents()
+    }
     calendarApi.addEventSource(eventList);
-    console.log(eventList);
   };
 
   const modifyEndDateIfNightShift = (shiftEnd, shiftStart, workerShift) => {
