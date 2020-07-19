@@ -9,11 +9,21 @@ export default function DisplayCalendar() {
   let { workerShifts } = useContext(WorkerShiftContext);
   let calendarRef = React.useRef();
 
+  function getRandomColor() {
+    let letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
   const generateEvents = () => {
     let eventList = [];
     for (let workerShift of workerShifts) {
       let dateMove = new Date(workerShift.startDate);
       let currentDate = workerShift.startDate;
+      let userColor = getRandomColor();
 
       while (currentDate < workerShift.endDate) {
         currentDate = dateMove.toISOString().slice(0, 10);
@@ -21,6 +31,7 @@ export default function DisplayCalendar() {
         let shiftEnd = currentDate + "T" + workerShift.endTime;
 
         eventList.push({
+          display: "list-item",
           id: workerShift.id,
           className: "event-text",
           title:
@@ -29,15 +40,14 @@ export default function DisplayCalendar() {
             workerShift.shifterUser.lastName,
           start: shiftStart,
           end: modifyEndDateIfNightShift(shiftEnd, shiftStart, workerShift),
-          //color:"green"
+          color: userColor,
         });
-
         dateMove.setDate(dateMove.getDate() + 1);
       }
     }
     let calendarApi = calendarRef.current.getApi();
     if (calendarApi.getEventSources()) {
-      calendarApi.removeAllEvents()
+      calendarApi.removeAllEvents();
     }
     calendarApi.addEventSource(eventList);
   };
@@ -65,6 +75,18 @@ export default function DisplayCalendar() {
         right: "dayGridMonth,timeGridWeek,timeGridDay",
       }}
       allDaySlot={false}
+      nextDayThreshold="06:00:00"
+      slotLabelFormat={{
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      }}
+      eventTimeFormat={{
+        hour: "2-digit",
+        minute: "2-digit",
+        meridiem: false,
+        hour12: false,
+      }}
     />
   );
 }
