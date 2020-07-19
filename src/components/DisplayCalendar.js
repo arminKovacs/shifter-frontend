@@ -13,10 +13,12 @@ export default function DisplayCalendar() {
     let eventList = [];
     for (let workerShift of workerShifts) {
       let dateMove = new Date(workerShift.startDate);
-      let strDate = workerShift.startDate;
+      let currentDate = workerShift.startDate;
 
-      while (strDate < workerShift.endDate) {
-        strDate = dateMove.toISOString().slice(0, 10);
+      while (currentDate < workerShift.endDate) {
+        currentDate = dateMove.toISOString().slice(0, 10);
+        let shiftStart = currentDate + "T" + workerShift.startTime;
+        let shiftEnd = currentDate + "T" + workerShift.endTime;
 
         eventList.push({
           className: "event-text",
@@ -24,17 +26,27 @@ export default function DisplayCalendar() {
             workerShift.shifterUser.firstName +
             " " +
             workerShift.shifterUser.lastName,
-          start: strDate + "T" + workerShift.startTime,
-          end: strDate + "T" + workerShift.endTime,
+          start: shiftStart,
+          end: modifyEndDateIfNightShift(shiftEnd, shiftStart, workerShift),
           //color:"green"
         });
 
         dateMove.setDate(dateMove.getDate() + 1);
       }
     }
-
-    let calendarApi = calendarRef.current.getApi();    
+    let calendarApi = calendarRef.current.getApi();
     calendarApi.addEventSource(eventList);
+    console.log(eventList);
+  };
+
+  const modifyEndDateIfNightShift = (shiftEnd, shiftStart, workerShift) => {
+    if (new Date(shiftEnd) < new Date(shiftStart)) {
+      let dateMoveEnd = new Date(shiftEnd);
+      dateMoveEnd.setDate(dateMoveEnd.getDate() + 1);
+      shiftEnd =
+        dateMoveEnd.toISOString().slice(0, 10) + "T" + workerShift.endTime;
+    }
+    return shiftEnd;
   };
 
   useEffect(generateEvents, [workerShifts]);

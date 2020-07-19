@@ -12,7 +12,7 @@ export const AssignShiftProvider = (props) => {
     endDate: "",
   });
 
-  let { workerShifts, setWorkerShifts } = useContext(WorkerShiftContext);
+  let { setWorkerShifts } = useContext(WorkerShiftContext);
 
   const postShiftAssignment = () => {
     axios
@@ -23,9 +23,7 @@ export const AssignShiftProvider = (props) => {
         endDate: shiftAssignmentDetails.endDate,
       })
       .then((response) => {
-        console.log(workerShifts);
         setWorkerShifts(response.data);
-        console.log(workerShifts);
       });
   };
 
