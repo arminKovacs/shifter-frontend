@@ -3,6 +3,7 @@ import { WorkerShiftContext } from "./context/WorkerShiftContext";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/resource-daygrid";
+import listPlugin from "@fullcalendar/list";
 import "../css/DisplayCalendar.css";
 
 export default function DisplayCalendar() {
@@ -32,7 +33,7 @@ export default function DisplayCalendar() {
 
         eventList.push({
           display: "list-item",
-          id: workerShift.id,
+          groupId: workerShift.id,
           className: "event-text",
           title:
             workerShift.shifterUser.firstName +
@@ -42,6 +43,7 @@ export default function DisplayCalendar() {
           end: modifyEndDateIfNightShift(shiftEnd, shiftStart, workerShift),
           color: userColor,
         });
+
         dateMove.setDate(dateMove.getDate() + 1);
       }
     }
@@ -67,24 +69,28 @@ export default function DisplayCalendar() {
   return (
     <FullCalendar
       ref={calendarRef}
-      plugins={[dayGridPlugin, timeGridPlugin]}
+      plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
       initialView="dayGridMonth"
       headerToolbar={{
         left: "prev,next today",
         center: "title",
-        right: "dayGridMonth,timeGridWeek,timeGridDay",
+        right: "dayGridMonth,listWeek,timeGridDay",
       }}
       allDaySlot={false}
-
+      slotEventOverlap={false}
       slotLabelFormat={{
         hour: "2-digit",
         minute: "2-digit",
         hour12: false,
       }}
+      views={{
+        dayGridMonth: {
+          displayEventTime: false,
+        },
+      }}
       eventTimeFormat={{
         hour: "2-digit",
         minute: "2-digit",
-        meridiem: false,
         hour12: false,
       }}
     />
