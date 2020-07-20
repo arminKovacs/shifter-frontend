@@ -31,18 +31,35 @@ export default function DisplayCalendar() {
         let shiftStart = currentDate + "T" + workerShift.startTime;
         let shiftEnd = currentDate + "T" + workerShift.endTime;
 
-        eventList.push({
-          display: "list-item",
-          groupId: workerShift.id,
-          className: "event-text",
-          title:
-            workerShift.shifterUser.firstName +
-            " " +
-            workerShift.shifterUser.lastName,
-          start: shiftStart,
-          end: modifyEndDateIfNightShift(shiftEnd, shiftStart, workerShift),
-          color: userColor,
-        });
+        eventList.push(
+          workerShift.name === "Holiday"
+            ? {
+                display: "block",
+                className: "event-text",
+                title:
+                  workerShift.shifterUser.firstName +
+                  " " +
+                  workerShift.shifterUser.lastName,
+                start: shiftStart,
+                end: shiftEnd,
+                color: "red",
+              }
+            : {
+                display: "list-item",
+                className: "event-text",
+                title:
+                  workerShift.shifterUser.firstName +
+                  " " +
+                  workerShift.shifterUser.lastName,
+                start: shiftStart,
+                end: modifyEndDateIfNightShift(
+                  shiftEnd,
+                  shiftStart,
+                  workerShift
+                ),
+                color: userColor,
+              }
+        );
 
         dateMove.setDate(dateMove.getDate() + 1);
       }
@@ -68,6 +85,7 @@ export default function DisplayCalendar() {
 
   return (
     <FullCalendar
+      schedulerLicenseKey="CC-Attribution-NonCommercial-NoDerivatives"
       ref={calendarRef}
       plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
       initialView="dayGridMonth"
