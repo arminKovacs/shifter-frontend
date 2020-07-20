@@ -75,7 +75,7 @@ export default function DisplayCalendar() {
         right: "dayGridMonth,timeGridWeek,timeGridDay",
       }}
       allDaySlot={false}
-      nextDayThreshold="06:00:00"
+
       slotLabelFormat={{
         hour: "2-digit",
         minute: "2-digit",

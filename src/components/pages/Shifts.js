@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import moment from "moment";
 import DisplayCalendar from "../DisplayCalendar";
 import { WorkerContext } from "../context/WorkerContext";
 import { ShiftContext } from "../context/ShiftContext";
@@ -68,6 +69,11 @@ export default function Shifts() {
     </Menu>
   );
 
+  const disabledDate = (current) => {
+    let today = new Date().toISOString().slice(0, 10);
+    return current && current < moment(today, "YYYY-MM-DD");
+  };
+
   return (
     <div>
       <Dropdown overlay={workersList} className="person-dropdown">
@@ -75,7 +81,11 @@ export default function Shifts() {
           {displayWorker} <DownOutlined />
         </Button>
       </Dropdown>
-      <RangePicker className="work-time" onChange={dateChange} />
+      <RangePicker
+        className="work-time"
+        onChange={dateChange}
+        disabledDate={disabledDate}
+      />
       <Dropdown overlay={shiftTypes} className="shift-dropdown">
         <Button>
           {displayShift} <DownOutlined />
