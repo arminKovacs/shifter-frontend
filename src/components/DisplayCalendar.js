@@ -22,53 +22,60 @@ export default function DisplayCalendar() {
   const generateEvents = () => {
     let eventList = [];
     for (let workerShift of workerShifts) {
-      let dateMove = new Date(workerShift.startDate);
-      let currentDate = workerShift.startDate;
-      let userColor = getRandomColor();
-
-      while (currentDate < workerShift.endDate) {
-        currentDate = dateMove.toISOString().slice(0, 10);
-        let shiftStart = currentDate + "T" + workerShift.startTime;
-        let shiftEnd = currentDate + "T" + workerShift.endTime;
-
-        eventList.push(
-          workerShift.name === "Holiday"
-            ? {
-                display: "block",
-                className: "event-text",
-                title:
-                  workerShift.shifterUser.firstName +
-                  " " +
-                  workerShift.shifterUser.lastName,
-                start: shiftStart,
-                end: shiftEnd,
-                color: "red",
-              }
-            : {
-                display: "list-item",
-                className: "event-text",
-                title:
-                  workerShift.shifterUser.firstName +
-                  " " +
-                  workerShift.shifterUser.lastName,
-                start: shiftStart,
-                end: modifyEndDateIfNightShift(
-                  shiftEnd,
-                  shiftStart,
-                  workerShift
-                ),
-                color: userColor,
-              }
-        );
-
-        dateMove.setDate(dateMove.getDate() + 1);
+      if (workerShift.name === "Holiday") {
+        generateHoliday(workerShift, eventList);
+        continue;
       }
+      generateEventDays(workerShift, eventList);
     }
     let calendarApi = calendarRef.current.getApi();
     if (calendarApi.getEventSources()) {
       calendarApi.removeAllEvents();
     }
     calendarApi.addEventSource(eventList);
+  };
+
+  const generateHoliday = (workerShift, eventList) => {
+    let endDateToModify = new Date(workerShift.endDate);
+    endDateToModify.setDate(endDateToModify.getDate() + 1);
+    let modifiedEndDate = endDateToModify.toISOString().slice(0, 10);
+    eventList.push({
+      display: "block",
+      className: "event-text",
+      title:
+        workerShift.shifterUser.firstName +
+        " " +
+        workerShift.shifterUser.lastName,
+      start: workerShift.startDate,
+      end: modifiedEndDate,
+      color: "red",
+    });
+  };
+
+  const generateEventDays = (workerShift, eventList) => {
+    let dateMove = new Date(workerShift.startDate);
+    let currentDate = workerShift.startDate;
+    let userColor = getRandomColor();
+
+    while (currentDate < workerShift.endDate) {
+      currentDate = dateMove.toISOString().slice(0, 10);
+      let shiftStart = currentDate + "T" + workerShift.startTime;
+      let shiftEnd = currentDate + "T" + workerShift.endTime;
+
+      eventList.push({
+        display: "list-item",
+        className: "event-text",
+        title:
+          workerShift.shifterUser.firstName +
+          " " +
+          workerShift.shifterUser.lastName,
+        start: shiftStart,
+        end: modifyEndDateIfNightShift(shiftEnd, shiftStart, workerShift),
+        color: userColor,
+      });
+      console.log(eventList)
+      dateMove.setDate(dateMove.getDate() + 1);
+    }
   };
 
   const modifyEndDateIfNightShift = (shiftEnd, shiftStart, workerShift) => {
