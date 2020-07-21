@@ -3,13 +3,19 @@
 }
 
 @media (max-width: 620px) {
-  .fc .fc-toolbar {
-    display: inline-block;
-    margin: auto;
+  .fc-toolbar .fc-left,
+  .fc-toolbar .fc-center,
+  .fc-toolbar .fc-right {
     transform: scale(0.8, 0.8);
-    -ms-transform: scale(0.8, 0.8); 
-    -webkit-transform: scale(0.8, 0.8); 
-    -o-transform: scale(0.8, 0.8); 
-    -moz-transform: scale(0.8, 0.8); 
+    -ms-transform: scale(0.8, 0.8);
+    -webkit-transform: scale(0.8, 0.8);
+    -o-transform: scale(0.8, 0.8);
+    -moz-transform: scale(0.8, 0.8);
   }
+}
+
+@media (max-width: 620px) {
+  .fc .fc-toolbar.fc-header-toolbar{
+    margin-bottom: 0px;
+  }  
 }

@@ -72,8 +72,7 @@ export default function DisplayCalendar() {
         start: shiftStart,
         end: modifyEndDateIfNightShift(shiftEnd, shiftStart, workerShift),
         color: userColor,
-      });
-      console.log(eventList)
+      });      
       dateMove.setDate(dateMove.getDate() + 1);
     }
   };
@@ -101,7 +100,6 @@ export default function DisplayCalendar() {
         center: "title",
         right: "dayGridMonth,listWeek,timeGridDay",
       }}
-      allDaySlot={false}
       slotEventOverlap={false}
       slotLabelFormat={{
         hour: "2-digit",
