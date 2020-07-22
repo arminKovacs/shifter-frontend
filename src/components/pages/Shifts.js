@@ -4,7 +4,7 @@ import DisplayCalendar from "../DisplayCalendar";
 import { WorkerContext } from "../context/WorkerContext";
 import { ShiftContext } from "../context/ShiftContext";
 import { AssignShiftContext } from "../context/AssignShiftContext";
-import { Menu, Dropdown, Button, Divider, DatePicker, message } from "antd";
+import { Menu, Dropdown, Button, Divider, DatePicker } from "antd";
 import {
   DownOutlined,
   UserOutlined,
@@ -96,10 +96,7 @@ export default function Shifts() {
         shape="circle"
         icon={<CheckOutlined />}
         className="check-button"
-        onClick={() => {
-          postShiftAssignment();
-          message.success("Shift updated!");
-        }}
+        onClick={postShiftAssignment}
       />
       <Divider />
       <DisplayCalendar />

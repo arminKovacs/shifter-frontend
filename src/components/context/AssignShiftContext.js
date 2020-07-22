@@ -1,5 +1,6 @@
 import React, { useState, createContext, useContext } from "react";
 import { WorkerShiftContext } from "./WorkerShiftContext";
+import { message } from "antd";
 import axios from "axios";
 
 export const AssignShiftContext = createContext();
@@ -24,6 +25,10 @@ export const AssignShiftProvider = (props) => {
       })
       .then((response) => {
         setWorkerShifts(response.data);
+        message.success("Shift updated");
+      })
+      .catch(() => {
+        message.error("Shift already assigned to user");
       });
   };
 
