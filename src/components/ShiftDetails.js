@@ -9,14 +9,14 @@ export default function ShiftDetails(props) {
     visible,
     setVisible,
     modalText,
+    deleteEvent,
   } = useContext(ShiftDetailsContext);
 
   function handleOk() {
     setConfirmLoading(true);
-    setTimeout(() => {
-      setVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
+    deleteEvent();
+    setVisible(false);
+    setConfirmLoading(false);
   }
 
   function handleCancel() {
@@ -30,6 +30,9 @@ export default function ShiftDetails(props) {
       onOk={handleOk}
       confirmLoading={confirmLoading}
       onCancel={handleCancel}
+      okType="danger"
+      okText="Delete shift"
+      cancelText="Return"
     >
       <p>{modalText}</p>
     </Modal>

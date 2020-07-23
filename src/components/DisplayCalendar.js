@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { WorkerShiftContext } from "./context/WorkerShiftContext";
 import { ShiftDetailsContext } from "./context/ShiftDetailsContext";
 import ShiftDetails from "./ShiftDetails";
@@ -10,8 +10,10 @@ import "../css/DisplayCalendar.css";
 
 export default function DisplayCalendar() {
   let { workerShifts } = useContext(WorkerShiftContext);
-  let { showModal, modalText, setModalText } = useContext(ShiftDetailsContext);
-  let calendarRef = React.useRef();
+  let { showModal, modalText, setModalText, setShiftToDelete } = useContext(
+    ShiftDetailsContext
+  );
+  let calendarRef = useRef();
   let eventList = [];
 
   const generateEvents = () => {
@@ -126,6 +128,7 @@ export default function DisplayCalendar() {
         }}
         eventClick={(info) => {
           setModalText(info.event._def.extendedProps.description);
+          setShiftToDelete(info.event._def.publicId);
           showModal();
         }}
       />

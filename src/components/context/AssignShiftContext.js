@@ -22,9 +22,9 @@ export const AssignShiftProvider = (props) => {
         startDate: shiftAssignmentDetails.startDate,
         endDate: shiftAssignmentDetails.endDate,
       })
-      .then((response) => {
+      .then(response => {
         setWorkerShifts(response.data);
-        message.success("Shift updated");
+        message.success("Shift assigned");
       })
       .catch(() => {
         message.error("Shift already assigned to user");
