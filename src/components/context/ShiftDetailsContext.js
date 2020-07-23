@@ -5,6 +5,7 @@ export const ShiftDetailsContext = createContext();
 export function ShiftDetailsProvider(props) {
   let [confirmLoading, setConfirmLoading] = useState(false);
   let [visible, setVisible] = useState(false);
+  let [modalText, setModalText] = useState("");
 
   function showModal() {
     setVisible(true);
@@ -18,6 +19,8 @@ export function ShiftDetailsProvider(props) {
         visible,
         setVisible,
         showModal,
+        modalText,
+        setModalText,
       }}
     >
       {props.children}

@@ -3,8 +3,13 @@ import { ShiftDetailsContext } from "./context/ShiftDetailsContext";
 import { Modal } from "antd";
 
 export default function ShiftDetails(props) {
-  let { confirmLoading, setConfirmLoading } = useContext(ShiftDetailsContext);
-  let { visible, setVisible } = useContext(ShiftDetailsContext);
+  let {
+    confirmLoading,
+    setConfirmLoading,
+    visible,
+    setVisible,
+    modalText,
+  } = useContext(ShiftDetailsContext);
 
   function handleOk() {
     setConfirmLoading(true);
@@ -26,7 +31,7 @@ export default function ShiftDetails(props) {
       confirmLoading={confirmLoading}
       onCancel={handleCancel}
     >
-      <p>Test</p>
+      <p>{modalText}</p>
     </Modal>
   );
 }

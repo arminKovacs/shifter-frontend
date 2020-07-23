@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { WorkerShiftContext } from "./context/WorkerShiftContext";
 import { ShiftDetailsContext } from "./context/ShiftDetailsContext";
 import ShiftDetails from "./ShiftDetails";
@@ -10,8 +10,7 @@ import "../css/DisplayCalendar.css";
 
 export default function DisplayCalendar() {
   let { workerShifts } = useContext(WorkerShiftContext);
-  let { showModal } = useContext(ShiftDetailsContext);
-  let [eventInfo, setEventInfo] = useState()
+  let { showModal, modalText, setModalText } = useContext(ShiftDetailsContext);
   let calendarRef = React.useRef();
   let eventList = [];
 
@@ -36,6 +35,7 @@ export default function DisplayCalendar() {
     let modifiedEndDate = endDateToModify.toISOString().slice(0, 10);
     eventList.push({
       id: workerShift.id,
+      description: workerShift.name,
       display: "block",
       className: "event-text",
       title:
@@ -56,9 +56,20 @@ export default function DisplayCalendar() {
       currentDate = dateMove.toISOString().slice(0, 10);
       let shiftStart = currentDate + "T" + workerShift.startTime;
       let shiftEnd = currentDate + "T" + workerShift.endTime;
+      let shiftDescription =
+        workerShift.shifterUser.firstName +
+        " " +
+        workerShift.shifterUser.lastName +
+        " - " +
+        workerShift.name +
+        " " +
+        workerShift.startTime +
+        "-" +
+        workerShift.endTime;
 
       eventList.push({
         id: workerShift.id,
+        description: shiftDescription,
         display: "list-item",
         className: "event-text",
         title:
@@ -113,13 +124,12 @@ export default function DisplayCalendar() {
           minute: "2-digit",
           hour12: false,
         }}
-        eventClick={(info)=>{
-          setEventInfo(info.event)
-          console.log(info.event)
-          showModal()
+        eventClick={(info) => {
+          setModalText(info.event._def.extendedProps.description);
+          showModal();
         }}
       />
-      <ShiftDetails props={eventInfo} /> 
+      <ShiftDetails props={modalText} />
     </div>
   );
 }
