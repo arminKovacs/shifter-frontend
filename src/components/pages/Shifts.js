@@ -4,6 +4,7 @@ import DisplayCalendar from "../DisplayCalendar";
 import { WorkerContext } from "../context/WorkerContext";
 import { ShiftContext } from "../context/ShiftContext";
 import { AssignShiftContext } from "../context/AssignShiftContext";
+import { ShiftDetailsProvider } from "../context/ShiftDetailsContext";
 import { Menu, Dropdown, Button, Divider, DatePicker } from "antd";
 import {
   DownOutlined,
@@ -99,7 +100,9 @@ export default function Shifts() {
         onClick={postShiftAssignment}
       />
       <Divider />
-      <DisplayCalendar />
+      <ShiftDetailsProvider>
+        <DisplayCalendar />
+      </ShiftDetailsProvider>
     </div>
   );
 }

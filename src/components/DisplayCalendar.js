@@ -1,5 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { WorkerShiftContext } from "./context/WorkerShiftContext";
+import { ShiftDetailsContext } from "./context/ShiftDetailsContext";
+import ShiftDetails from "./ShiftDetails";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/resource-daygrid";
@@ -8,10 +10,12 @@ import "../css/DisplayCalendar.css";
 
 export default function DisplayCalendar() {
   let { workerShifts } = useContext(WorkerShiftContext);
+  let { showModal } = useContext(ShiftDetailsContext);
+  let [eventInfo, setEventInfo] = useState()
   let calendarRef = React.useRef();
+  let eventList = [];
 
   const generateEvents = () => {
-    let eventList = [];
     for (let workerShift of workerShifts) {
       if (workerShift.name === "Holiday") {
         generateHoliday(workerShift, eventList);
@@ -31,6 +35,7 @@ export default function DisplayCalendar() {
     endDateToModify.setDate(endDateToModify.getDate() + 1);
     let modifiedEndDate = endDateToModify.toISOString().slice(0, 10);
     eventList.push({
+      id: workerShift.id,
       display: "block",
       className: "event-text",
       title:
@@ -53,6 +58,7 @@ export default function DisplayCalendar() {
       let shiftEnd = currentDate + "T" + workerShift.endTime;
 
       eventList.push({
+        id: workerShift.id,
         display: "list-item",
         className: "event-text",
         title:
@@ -62,7 +68,7 @@ export default function DisplayCalendar() {
         start: shiftStart,
         end: modifyEndDateIfNightShift(shiftEnd, shiftStart, workerShift),
         color: workerShift.shifterUser.calendarColor,
-      });      
+      });
       dateMove.setDate(dateMove.getDate() + 1);
     }
   };
@@ -80,32 +86,40 @@ export default function DisplayCalendar() {
   useEffect(generateEvents, [workerShifts]);
 
   return (
-    <FullCalendar
-      schedulerLicenseKey="CC-Attribution-NonCommercial-NoDerivatives"
-      ref={calendarRef}
-      plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
-      initialView="dayGridMonth"
-      headerToolbar={{
-        left: "prev,next today",
-        center: "title",
-        right: "dayGridMonth,listWeek,timeGridDay",
-      }}
-      slotEventOverlap={false}
-      slotLabelFormat={{
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }}
-      views={{
-        dayGridMonth: {
-          displayEventTime: false,
-        },
-      }}
-      eventTimeFormat={{
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-      }}
-    />
+    <div>
+      <FullCalendar
+        schedulerLicenseKey="CC-Attribution-NonCommercial-NoDerivatives"
+        ref={calendarRef}
+        plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
+        initialView="dayGridMonth"
+        headerToolbar={{
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,listWeek,timeGridDay",
+        }}
+        slotEventOverlap={false}
+        slotLabelFormat={{
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }}
+        views={{
+          dayGridMonth: {
+            displayEventTime: false,
+          },
+        }}
+        eventTimeFormat={{
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        }}
+        eventClick={(info)=>{
+          setEventInfo(info.event)
+          console.log(info.event)
+          showModal()
+        }}
+      />
+      <ShiftDetails props={eventInfo} /> 
+    </div>
   );
 }
