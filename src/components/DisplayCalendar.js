@@ -10,15 +10,6 @@ export default function DisplayCalendar() {
   let { workerShifts } = useContext(WorkerShiftContext);
   let calendarRef = React.useRef();
 
-  function getRandomColor() {
-    let letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-
   const generateEvents = () => {
     let eventList = [];
     for (let workerShift of workerShifts) {
@@ -55,7 +46,6 @@ export default function DisplayCalendar() {
   const generateEventDays = (workerShift, eventList) => {
     let dateMove = new Date(workerShift.startDate);
     let currentDate = workerShift.startDate;
-    let userColor = getRandomColor();
 
     while (currentDate < workerShift.endDate) {
       currentDate = dateMove.toISOString().slice(0, 10);
@@ -71,7 +61,7 @@ export default function DisplayCalendar() {
           workerShift.shifterUser.lastName,
         start: shiftStart,
         end: modifyEndDateIfNightShift(shiftEnd, shiftStart, workerShift),
-        color: userColor,
+        color: workerShift.shifterUser.calendarColor,
       });      
       dateMove.setDate(dateMove.getDate() + 1);
     }
