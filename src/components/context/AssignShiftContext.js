@@ -17,8 +17,7 @@ export const AssignShiftProvider = (props) => {
 
   const postShiftAssignment = () => {
     axios
-      .post("http://localhost:8080/assign-shift", {
-        workerId: shiftAssignmentDetails.workerId,
+      .post("http://localhost:8080/worker-shifts/" + shiftAssignmentDetails.workerId, {
         shiftId: shiftAssignmentDetails.shiftId,
         startDate: shiftAssignmentDetails.startDate,
         endDate: shiftAssignmentDetails.endDate,
