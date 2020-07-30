@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import moment from "moment";
 import DisplayCalendar from "../DisplayCalendar";
 import { WorkerContext } from "../context/WorkerContext";
@@ -24,6 +24,8 @@ export default function Shifts() {
 
   let [displayWorker, setDisplayWorker] = useState("Choose a person");
   let [displayShift, setDisplayShift] = useState("Shift");
+  let [datePicked, setDatePicked] = useState(false);
+  let [buttonDisabled, setButtonDisabled] = useState(true);
 
   const chooseWorker = (worker) => {
     setDisplayWorker(worker.firstName + " " + worker.lastName);
@@ -40,6 +42,7 @@ export default function Shifts() {
   const dateChange = (value, dateStrings) => {
     shiftAssignmentDetails.startDate = dateStrings[0];
     shiftAssignmentDetails.endDate = dateStrings[1];
+    setDatePicked(true);
   };
 
   let workersList = (
@@ -77,6 +80,19 @@ export default function Shifts() {
     return current && current < moment(today, "YYYY-MM-DD");
   };
 
+  useEffect(()=>{
+    const disableSubmitButton = () => {
+      if (
+        displayWorker !== "Choose a person" &&
+        displayShift !== "Shift" &&
+        datePicked
+      ) {
+        setButtonDisabled(false);
+      }
+    };
+    disableSubmitButton()
+  }, [displayShift, displayWorker, datePicked])
+
   return (
     <div>
       <Dropdown overlay={workersList} className="person-dropdown">
@@ -100,6 +116,7 @@ export default function Shifts() {
         icon={<CheckOutlined />}
         className="check-button"
         onClick={postShiftAssignment}
+        disabled={buttonDisabled}
       />
       <Divider />
       <ShiftDetailsProvider>
