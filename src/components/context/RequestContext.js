@@ -4,7 +4,7 @@ import axios from "axios";
 export const RequestContext = createContext();
 
 export function RequestProvider(props) {
-  [requests, setRequests] = useState();
+  let [requests, setRequests] = useState([]);
 
   function getShiftRequests() {
     axios.get("http://localhost:8080/shift-requests/").then((response) => {

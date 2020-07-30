@@ -1,23 +1,25 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { RequestContext } from "../context/RequestContext";
 import { Table, Space, Button } from "antd";
 
 export default function Requests() {
-  const dataSource = [
-    {
-      key: "1",
-      name: "Test Joe",
-      shiftName: "Holiday",
-      shiftTime: "00:00:00 - 23:59:59",
-      shiftDate: "2020-08-20 - 2020-08-23",
-    },
-    {
-      key: "2",
-      name: "Test Bob",
-      shiftName: "Morning",
-      shiftTime: "06:00:00 - 14:00:00",
-      shiftDate: "2020-08-20 - 2020-08-23",
-    },
-  ];
+  let [dataSource, setDatasource] = useState([]);
+  let { requests } = useContext(RequestContext);
+
+  useEffect(() => {
+    let data = []
+    requests.map((request) => {
+      data.push({
+        key: request.id,
+        name:
+          request.shifterUser.firstName + " " + request.shifterUser.lastName,
+        shiftName: request.name,
+        shiftTime: request.startTime + " - " + request.endTime,
+        shiftDate: request.startDate + " - " + request.endDate,
+      });
+    });
+    setDatasource(data);
+  }, [requests]);
 
   const columns = [
     {
@@ -59,7 +61,6 @@ export default function Requests() {
         columns={columns}
         scroll={{ x: "max-content" }}
       />
-      ;
     </div>
   );
 }

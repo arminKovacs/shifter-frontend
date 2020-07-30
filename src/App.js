@@ -12,6 +12,7 @@ import { WorkerProvider } from "./components/context/WorkerContext";
 import { ShiftProvider } from "./components/context/ShiftContext";
 import { WorkerShiftProvider } from "./components/context/WorkerShiftContext";
 import { AssignShiftProvider } from "./components/context/AssignShiftContext";
+import { RequestProvider } from "./components/context/RequestContext";
 
 function App() {
   return (
@@ -20,17 +21,19 @@ function App() {
         <ShiftProvider>
           <WorkerShiftProvider>
             <AssignShiftProvider>
-              <Router>
-                <NavBar />
-                <div className="pageBody">
-                  <Route exact path="/" component={Home} />
-                  <Route path="/shifts" component={Shifts} />
-                  <Route path="/requests" component={Requests} />
-                  <Route path="/request" component={Request} />
-                  <Route path="/signin" component={Signin} />
-                  <Route path="/signup" component={Signup} />
-                </div>
-              </Router>
+              <RequestProvider>
+                <Router>
+                  <NavBar />
+                  <div className="pageBody">
+                    <Route exact path="/" component={Home} />
+                    <Route path="/shifts" component={Shifts} />
+                    <Route path="/requests" component={Requests} />
+                    <Route path="/request" component={Request} />
+                    <Route path="/signin" component={Signin} />
+                    <Route path="/signup" component={Signup} />
+                  </div>
+                </Router>
+              </RequestProvider>
             </AssignShiftProvider>
           </WorkerShiftProvider>
         </ShiftProvider>
