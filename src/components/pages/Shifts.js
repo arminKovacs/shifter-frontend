@@ -33,6 +33,8 @@ export default function Shifts() {
   const switchToChosenShift = (shift) => {
     setDisplayShift(shift.name);
     shiftAssignmentDetails.shiftId = shift.id;
+    shiftAssignmentDetails.startTime = shift.startTime;
+    shiftAssignmentDetails.endTime = shift.endTime;
   };
 
   const dateChange = (value, dateStrings) => {

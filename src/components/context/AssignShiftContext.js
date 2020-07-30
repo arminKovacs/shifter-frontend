@@ -9,6 +9,8 @@ export const AssignShiftProvider = (props) => {
   let [shiftAssignmentDetails, setShiftAssignmentDetails] = useState({
     workerId: "",
     shiftId: "",
+    startTime: "",
+    endTime: "",
     startDate: "",
     endDate: "",
   });
@@ -21,6 +23,8 @@ export const AssignShiftProvider = (props) => {
         shiftId: shiftAssignmentDetails.shiftId,
         startDate: shiftAssignmentDetails.startDate,
         endDate: shiftAssignmentDetails.endDate,
+        startTime: shiftAssignmentDetails.startTime,
+        endTime: shiftAssignmentDetails.endTime,
       })
       .then(response => {
         setWorkerShifts(response.data);
