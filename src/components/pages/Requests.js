@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Space } from 'antd';
+import { Table, Space, Button } from "antd";
 
 export default function Requests() {
   const dataSource = [
@@ -41,12 +41,12 @@ export default function Requests() {
       key: "shiftDate",
     },
     {
-      title: 'Action',
-      key: 'action',
+      title: "Action",
+      key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <button>Accept</button>
-          <button>Deny</button>
+          <Button>Accept</Button>
+          <Button>Deny</Button>
         </Space>
       ),
     },
@@ -54,7 +54,12 @@ export default function Requests() {
 
   return (
     <div>
-      <Table dataSource={dataSource} columns={columns} scroll={{ x: 'max-content' }} />;
+      <Table
+        dataSource={dataSource}
+        columns={columns}
+        scroll={{ x: "max-content" }}
+      />
+      ;
     </div>
   );
 }
