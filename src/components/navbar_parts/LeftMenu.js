@@ -21,12 +21,7 @@ export default function LeftMenu(props) {
         </Link>
       </Menu.Item>
       <Menu.Item key="requests" onClick={closeDrawer}>
-        <Link
-          to="/requests"
-          onClick={() => {
-            getShiftRequests();
-          }}
-        >
+        <Link to="/requests" onClick={getShiftRequests}>
           Requests
         </Link>
       </Menu.Item>
