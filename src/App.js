@@ -2,7 +2,6 @@ import React from "react";
 import "./css/App.css";
 import NavBar from "./components/navbar_parts/NavBar";
 import { Route, BrowserRouter as Router } from "react-router-dom";
-import Home from "./components/pages/Home";
 import Shifts from "./components/pages/Shifts";
 import Requests from "./components/pages/Requests";
 import Signin from "./components/pages/Signin";
@@ -23,10 +22,9 @@ function App() {
                 <Router>
                   <NavBar />
                   <div className="pageBody">
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/" component={Signin} />
                     <Route path="/shifts" component={Shifts} />
                     <Route path="/requests" component={Requests} />
-                    <Route path="/signin" component={Signin} />
                   </div>
                 </Router>
               </RequestProvider>

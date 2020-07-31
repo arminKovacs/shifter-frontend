@@ -10,11 +10,6 @@ export default function LeftMenu(props) {
 
   return (
     <Menu mode={modeState} selectedKeys={0}>
-      <Menu.Item key="home">
-        <Link to="/" onClick={closeDrawer}>
-          Home
-        </Link>
-      </Menu.Item>
       <Menu.Item key="shifts">
         <Link to="/shifts" onClick={closeDrawer}>
           Shifts

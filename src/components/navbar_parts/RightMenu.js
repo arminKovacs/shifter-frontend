@@ -9,8 +9,8 @@ export default function RightMenu(props) {
   return (
     <Menu mode={modeState} selectedKeys={0}>
       <Menu.Item key="signin" component={Link} to="/signin">
-        <Link to="/signin" onClick={closeDrawer}>
-          Sign in
+        <Link to="/logout" onClick={closeDrawer}>
+          Log out
         </Link>
       </Menu.Item>
     </Menu>

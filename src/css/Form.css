@@ -9,16 +9,20 @@
 }
 #components-form-demo-normal-login .login-form-button {
   width: 100%;
+}
 
+#login-container{
+  display: inline-flex;
 }
 
 .data-form {
+  display: inline-block;
   max-width: 400px;
   margin: auto;
   text-align: center;
 }
 
-#signin-logo{
+#signin-logo {
   background-image: url("../images/login-icon.png");
   background-repeat: no-repeat;
   background-size: contain;
@@ -28,16 +32,17 @@
   margin: 10px;
 }
 
-#signup-logo{
-  background-image: url("../images/sign-in.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 70px;
-  height: 70px;
-  display: inline-block;
-  margin: 10px;
+h1 {
+  font-weight: bold;
 }
 
-h1{
-  font-weight: bold;
+#login-picture {
+  background-image: url("../images/login-side.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+#starter-page {
+  height: 700px;
 }
