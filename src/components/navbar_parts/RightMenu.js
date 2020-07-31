@@ -13,11 +13,6 @@ export default function RightMenu(props) {
           Sign in
         </Link>
       </Menu.Item>
-      <Menu.Item key="signup" component={Link} to="/signup">
-        <Link to="/signup" onClick={closeDrawer}>
-          Sign up
-        </Link>
-      </Menu.Item>
     </Menu>
   );
 }
