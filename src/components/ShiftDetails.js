@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ShiftDetailsContext } from "./context/ShiftDetailsContext";
-import { Modal } from "antd";
+import { Modal, Divider } from "antd";
 
 export default function ShiftDetails(props) {
   let {
@@ -10,6 +10,7 @@ export default function ShiftDetails(props) {
     setVisible,
     modalText,
     deleteEvent,
+    shiftTimeRangeText,
   } = useContext(ShiftDetailsContext);
 
   function handleOk() {
@@ -35,6 +36,8 @@ export default function ShiftDetails(props) {
       cancelText="Return"
     >
       <p>{modalText}</p>
+      <Divider/>
+      <p>{shiftTimeRangeText}</p>
     </Modal>
   );
 }

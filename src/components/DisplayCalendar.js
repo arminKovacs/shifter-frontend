@@ -10,9 +10,13 @@ import "../css/DisplayCalendar.css";
 
 export default function DisplayCalendar() {
   let { workerShifts } = useContext(WorkerShiftContext);
-  let { showModal, modalText, setModalText, setShiftToDelete } = useContext(
-    ShiftDetailsContext
-  );
+  let {
+    showModal,
+    modalText,
+    setModalText,
+    setShiftToDelete,
+    setShiftTimeRangeText,
+  } = useContext(ShiftDetailsContext);
   let calendarRef = useRef();
   let eventList = [];
 
@@ -62,16 +66,20 @@ export default function DisplayCalendar() {
         workerShift.shifterUser.firstName +
         " " +
         workerShift.shifterUser.lastName +
-        " - " +
-        workerShift.name +
         " " +
-        workerShift.startTime +
-        "-" +
-        workerShift.endTime;
+        workerShift.startDate +
+        " " +
+        workerShift.endDate;
 
       eventList.push({
         id: workerShift.id,
         description: shiftDescription,
+        timeRange:
+          workerShift.name +
+          " " +
+          workerShift.startTime +
+          " - " +
+          workerShift.endTime,
         display: "list-item",
         className: "event-text",
         title:
@@ -128,6 +136,7 @@ export default function DisplayCalendar() {
         }}
         eventClick={(info) => {
           setModalText(info.event._def.extendedProps.description);
+          setShiftTimeRangeText(info.event._def.extendedProps.timeRange);
           setShiftToDelete(info.event._def.publicId);
           showModal();
         }}

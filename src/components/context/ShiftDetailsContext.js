@@ -9,6 +9,7 @@ export function ShiftDetailsProvider(props) {
   let [confirmLoading, setConfirmLoading] = useState(false);
   let [visible, setVisible] = useState(false);
   let [modalText, setModalText] = useState("");
+  let [shiftTimeRangeText, setShiftTimeRangeText] = useState("");
   let [shiftToDelete, setShiftToDelete] = useState();
   let { setWorkerShifts } = useContext(WorkerShiftContext);
 
@@ -38,6 +39,8 @@ export function ShiftDetailsProvider(props) {
         shiftToDelete,
         setShiftToDelete,
         deleteEvent,
+        shiftTimeRangeText,
+        setShiftTimeRangeText,
       }}
     >
       {props.children}
