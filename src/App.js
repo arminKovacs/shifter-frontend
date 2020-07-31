@@ -28,9 +28,7 @@ function App() {
                     <Route exact path="/" component={Home} />
                     <Route path="/shifts" component={Shifts} />
                     <Route path="/requests" component={Requests} />
-                    <Route path="/request" component={Request} />
                     <Route path="/signin" component={Signin} />
-                    <Route path="/signup" component={Signup} />
                   </div>
                 </Router>
               </RequestProvider>
