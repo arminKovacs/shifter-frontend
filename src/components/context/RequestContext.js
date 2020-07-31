@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { message } from "antd";
 import axios from "axios";
 
@@ -13,6 +13,12 @@ export function RequestProvider(props) {
     endTime: "",
     startDate: "",
     endDate: "",
+  });
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/shift-requests/").then((response) => {
+      setRequests(response.data);
+    });
   });
 
   function getShiftRequests() {
@@ -42,6 +48,14 @@ export function RequestProvider(props) {
       });
   }
 
+  function deleteShiftRequest(requestId) {
+    axios
+      .delete("http://localhost:8080/shift-requests/" + requestId)
+      .then((response) => {
+        setRequests(response.data);
+      });
+  }
+
   return (
     <RequestContext.Provider
       value={{
@@ -51,6 +65,7 @@ export function RequestProvider(props) {
         shiftRequestDetails,
         setShiftRequestDetails,
         postShiftRequests,
+        deleteShiftRequest,
       }}
     >
       {props.children}

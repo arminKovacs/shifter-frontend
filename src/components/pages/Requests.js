@@ -13,9 +13,12 @@ import "../../css/Shifts.css";
 export default function Requests() {
   const { RangePicker } = DatePicker;
   let [dataSource, setDatasource] = useState([]);
-  let { requests, shiftRequestDetails, postShiftRequests } = useContext(
-    RequestContext
-  );
+  let {
+    requests,
+    shiftRequestDetails,
+    postShiftRequests,
+    deleteShiftRequest,
+  } = useContext(RequestContext);
   let { shifts } = useContext(ShiftContext);
   let [displayShift, setDisplayShift] = useState("Shift");
   let [datePicked, setDatePicked] = useState(false);
@@ -101,7 +104,13 @@ export default function Requests() {
       render: (text, record) => (
         <Space size="middle">
           <Button>Accept</Button>
-          <Button>Deny</Button>
+          <Button
+            onClick={() => {
+              deleteShiftRequest(text.key);
+            }}
+          >
+            Deny
+          </Button>
         </Space>
       ),
     },
