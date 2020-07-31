@@ -8,13 +8,13 @@ import "../../css/Navbar.css";
 export default function NavBar() {
   let [visible, setVisible] = useState(false);
 
-  let showDrawer = () => {
+  function showDrawer() {
     setVisible(true);
-  };
+  }
 
-  let onClose = () => {
+  function onClose() {
     setVisible(false);
-  };
+  }
 
   return (
     <nav className="menu">

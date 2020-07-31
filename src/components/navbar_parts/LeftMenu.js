@@ -20,7 +20,7 @@ export default function LeftMenu(props) {
           Shifts
         </Link>
       </Menu.Item>
-      <Menu.Item key="requests">
+      <Menu.Item key="requests" onClick={closeDrawer}>
         <Link
           to="/requests"
           onClick={() => {
