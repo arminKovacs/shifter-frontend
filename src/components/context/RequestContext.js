@@ -1,4 +1,5 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useEffect, useContext } from "react";
+import { WorkerShiftContext } from "./WorkerShiftContext";
 import { message } from "antd";
 import axios from "axios";
 
@@ -14,12 +15,13 @@ export function RequestProvider(props) {
     startDate: "",
     endDate: "",
   });
+  let { setWorkerShifts } = useContext(WorkerShiftContext);
 
   useEffect(() => {
     axios.get("http://localhost:8080/shift-requests/").then((response) => {
       setRequests(response.data);
     });
-  });
+  }, []);
 
   function getShiftRequests() {
     axios.get("http://localhost:8080/shift-requests/").then((response) => {
@@ -56,6 +58,28 @@ export function RequestProvider(props) {
       });
   }
 
+  function postShiftAssignment(shiftToAssign, requestId) {
+    axios
+      .post(
+        "http://localhost:8080/worker-shifts/" + shiftToAssign.shifterUser.id,
+        {
+          shiftId: shiftToAssign.requestedShiftId,
+          startDate: shiftToAssign.startDate,
+          endDate: shiftToAssign.endDate,
+          startTime: shiftToAssign.startTime,
+          endTime: shiftToAssign.endTime,
+        }
+      )
+      .then((response) => {
+        setWorkerShifts(response.data);
+        deleteShiftRequest(requestId);
+        message.success("Shift assigned");
+      })
+      .catch(() => {
+        message.error("Shift already assigned to user");
+      });
+  }
+
   return (
     <RequestContext.Provider
       value={{
@@ -66,6 +90,7 @@ export function RequestProvider(props) {
         setShiftRequestDetails,
         postShiftRequests,
         deleteShiftRequest,
+        postShiftAssignment,
       }}
     >
       {props.children}

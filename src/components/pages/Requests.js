@@ -18,6 +18,7 @@ export default function Requests() {
     shiftRequestDetails,
     postShiftRequests,
     deleteShiftRequest,
+    postShiftAssignment,
   } = useContext(RequestContext);
   let { shifts } = useContext(ShiftContext);
   let [displayShift, setDisplayShift] = useState("Shift");
@@ -46,6 +47,7 @@ export default function Requests() {
         shiftName: request.name,
         shiftTime: request.startTime + " - " + request.endTime,
         shiftDate: request.startDate + " - " + request.endDate,
+        details: request,
       };
     });
     setDatasource(data);
@@ -103,7 +105,13 @@ export default function Requests() {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <Button>Accept</Button>
+          <Button
+            onClick={() => {
+              postShiftAssignment(text.details, text.key);
+            }}
+          >
+            Accept
+          </Button>
           <Button
             onClick={() => {
               deleteShiftRequest(text.key);
