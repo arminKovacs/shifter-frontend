@@ -13,7 +13,9 @@ import "../../css/Shifts.css";
 export default function Requests() {
   const { RangePicker } = DatePicker;
   let [dataSource, setDatasource] = useState([]);
-  let { requests, shiftRequestDetails } = useContext(RequestContext);
+  let { requests, shiftRequestDetails, postShiftRequests } = useContext(
+    RequestContext
+  );
   let { shifts } = useContext(ShiftContext);
   let [displayShift, setDisplayShift] = useState("Shift");
   let [datePicked, setDatePicked] = useState(false);
@@ -122,9 +124,7 @@ export default function Requests() {
         shape="circle"
         icon={<CheckOutlined />}
         className="check-button"
-        onClick={() => {
-          alert("Request sent");
-        }}
+        onClick={postShiftRequests}
         disabled={buttonDisabled}
       />
       <Table
