@@ -148,6 +148,7 @@ export default function Requests() {
         dataSource={dataSource}
         columns={columns}
         scroll={{ x: "max-content" }}
+        pagination={{ pageSize: 5 }}
       />
     </div>
   );
