@@ -7,6 +7,12 @@ export const ShiftProvider = (props) => {
   let [shifts, setShifts] = useState([]);
   let [confirmLoading, setConfirmLoading] = useState(false);
   let [visible, setVisible] = useState(false);
+  let [newShiftDetails, setNewShiftDetails] = useState({
+    name: "",
+    startTime: "",
+    endTime: "",
+    shiftColor: "",
+  });
 
   function showModal() {
     setVisible(true);
@@ -28,6 +34,8 @@ export const ShiftProvider = (props) => {
         visible,
         setVisible,
         showModal,
+        newShiftDetails,
+        setNewShiftDetails,
       }}
     >
       {props.children}

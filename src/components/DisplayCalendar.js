@@ -50,7 +50,7 @@ export default function DisplayCalendar() {
         workerShift.shifterUser.lastName,
       start: workerShift.startDate,
       end: modifiedEndDate,
-      color: "red",
+      color: workerShift.shiftColor,
     });
   };
 
@@ -88,7 +88,7 @@ export default function DisplayCalendar() {
           workerShift.shifterUser.lastName,
         start: shiftStart,
         end: modifyEndDateIfNightShift(shiftEnd, shiftStart, workerShift),
-        color: workerShift.shifterUser.calendarColor,
+        color: workerShift.shiftColor,
       });
       dateMove.setDate(dateMove.getDate() + 1);
     }
