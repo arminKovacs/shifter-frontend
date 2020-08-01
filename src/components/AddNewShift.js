@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { ShiftContext } from "./context/ShiftContext";
-import { Modal, Divider } from "antd";
+import { Modal, Divider, TimePicker, Input } from "antd";
 
 export default function AddNewShift(props) {
   let { confirmLoading, setConfirmLoading, visible, setVisible } = useContext(
     ShiftContext
   );
+
+  const { RangePicker } = TimePicker;
 
   function handleOk() {
     setConfirmLoading(true);
@@ -27,9 +29,9 @@ export default function AddNewShift(props) {
       okText="Add shift"
       cancelText="Return"
     >
-      <p>Up</p>
+      <Input placeholder="Shift name"/>
       <Divider />
-      <p>Down</p>
+      <RangePicker/>
     </Modal>
   );
 }
