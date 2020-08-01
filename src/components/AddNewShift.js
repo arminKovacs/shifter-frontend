@@ -10,6 +10,7 @@ export default function AddNewShift(props) {
     visible,
     setVisible,
     newShiftDetails,
+    postNewShiftDetails,
   } = useContext(ShiftContext);
   let [timePicked, setTimePicked] = useState(false);
 
@@ -17,7 +18,7 @@ export default function AddNewShift(props) {
 
   function handleOk() {
     setConfirmLoading(true);
-    console.log(newShiftDetails)
+    postNewShiftDetails();
     setVisible(false);
     setConfirmLoading(false);
   }
