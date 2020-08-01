@@ -1,37 +1,29 @@
 import React from "react";
 import "./css/App.css";
-import NavBar from "./components/navbar_parts/NavBar";
-import { Route, BrowserRouter as Router } from "react-router-dom";
-import Shifts from "./components/pages/Shifts";
-import Requests from "./components/pages/Requests";
-import Signin from "./components/pages/Signin";
+import PageRoutes from "./components/pages/PageRoutes";
 import { WorkerProvider } from "./components/context/WorkerContext";
 import { ShiftProvider } from "./components/context/ShiftContext";
 import { WorkerShiftProvider } from "./components/context/WorkerShiftContext";
 import { AssignShiftProvider } from "./components/context/AssignShiftContext";
 import { RequestProvider } from "./components/context/RequestContext";
+import { LoginProvider } from "./components/context/LoginContext";
 
 function App() {
   return (
     <div className="App">
-      <WorkerProvider>
-        <ShiftProvider>
-          <WorkerShiftProvider>
-            <AssignShiftProvider>
-              <RequestProvider>
-                <Router>
-                  <NavBar />
-                  <div className="pageBody">
-                    <Route exact path="/" component={Signin} />
-                    <Route path="/shifts" component={Shifts} />
-                    <Route path="/requests" component={Requests} />
-                  </div>
-                </Router>
-              </RequestProvider>
-            </AssignShiftProvider>
-          </WorkerShiftProvider>
-        </ShiftProvider>
-      </WorkerProvider>
+      <LoginProvider>
+        <WorkerProvider>
+          <ShiftProvider>
+            <WorkerShiftProvider>
+              <AssignShiftProvider>
+                <RequestProvider>
+                  <PageRoutes />
+                </RequestProvider>
+              </AssignShiftProvider>
+            </WorkerShiftProvider>
+          </ShiftProvider>
+        </WorkerProvider>
+      </LoginProvider>
     </div>
   );
 }

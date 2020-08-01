@@ -1,12 +1,19 @@
 import "../../css/Form.css";
-import React from "react";
+import React, { useContext } from "react";
 import { Form, Input, Button, Row, Col, Divider } from "antd";
 import { Link } from "react-router-dom";
+import { LoginContext } from "../context/LoginContext";
 
 export default function Signin() {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
+
+  let { setLoginDetails } = useContext(LoginContext);
+
+  function placeHolderLogin() {
+    setLoginDetails("Logged in");
+  }
 
   return (
     <Row id="starter-page">
@@ -59,6 +66,7 @@ export default function Signin() {
                 type="primary"
                 htmlType="submit"
                 className="login-form-button"
+                onClick={placeHolderLogin}
               >
                 Sign in
               </Button>
