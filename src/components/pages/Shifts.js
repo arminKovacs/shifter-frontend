@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import moment from "moment";
 import DisplayCalendar from "../DisplayCalendar";
+import AddNewShift from "../AddNewShift";
 import { WorkerContext } from "../context/WorkerContext";
 import { ShiftContext } from "../context/ShiftContext";
 import { AssignShiftContext } from "../context/AssignShiftContext";
@@ -17,7 +18,7 @@ import "../../css/Shifts.css";
 export default function Shifts() {
   const { RangePicker } = DatePicker;
   let { workers } = useContext(WorkerContext);
-  let { shifts } = useContext(ShiftContext);
+  let { shifts, showModal } = useContext(ShiftContext);
   let { shiftAssignmentDetails, postShiftAssignment } = useContext(
     AssignShiftContext
   );
@@ -77,6 +78,10 @@ export default function Shifts() {
           {shift.name}: {shift.startTime}-{shift.endTime}
         </Menu.Item>
       ))}
+      <Menu.Divider />
+      <Menu.Item className="menu-style">
+        <Button onClick={showModal}>Add new shift</Button>
+      </Menu.Item>
     </Menu>
   );
 
@@ -116,6 +121,7 @@ export default function Shifts() {
           {displayShift} <DownOutlined />
         </Button>
       </Dropdown>
+      <AddNewShift />
       <Button
         type="primary"
         shape="circle"
@@ -124,7 +130,7 @@ export default function Shifts() {
         onClick={() => {
           postShiftAssignment();
           setButtonDisabled(true);
-          setDisplayWorker("Choose a person")
+          setDisplayWorker("Choose a person");
           setDisplayShift("Shift");
           setDatePicked(false);
           changeDateRange(null);
