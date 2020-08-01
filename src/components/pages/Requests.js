@@ -24,6 +24,7 @@ export default function Requests() {
   let [displayShift, setDisplayShift] = useState("Shift");
   let [datePicked, setDatePicked] = useState(false);
   let [buttonDisabled, setButtonDisabled] = useState(true);
+  let [dateRange, changeDateRange] = useState(null);
 
   const switchToChosenShift = (shift) => {
     setDisplayShift(shift.name);
@@ -36,6 +37,10 @@ export default function Requests() {
     shiftRequestDetails.startDate = dateStrings[0];
     shiftRequestDetails.endDate = dateStrings[1];
     setDatePicked(true);
+    changeDateRange([
+      moment(dateStrings[0], "YYYY-MM-DD"),
+      moment(dateStrings[1], "YYYY-MM-DD"),
+    ]);
   };
 
   useEffect(() => {
@@ -91,12 +96,12 @@ export default function Requests() {
       key: "shiftName",
     },
     {
-      title: "Shift time",
+      title: "Time",
       dataIndex: "shiftTime",
       key: "shiftTime",
     },
     {
-      title: "Shift date",
+      title: "Date",
       dataIndex: "shiftDate",
       key: "shiftDate",
     },
@@ -116,6 +121,7 @@ export default function Requests() {
             onClick={() => {
               deleteShiftRequest(text.key);
             }}
+            danger
           >
             Deny
           </Button>
@@ -135,13 +141,20 @@ export default function Requests() {
         className="work-time"
         onChange={dateChange}
         disabledDate={disabledDate}
+        value={dateRange}
       />
       <Button
         type="primary"
         shape="circle"
         icon={<CheckOutlined />}
         className="check-button"
-        onClick={postShiftRequests}
+        onClick={() => {
+          postShiftRequests();
+          setButtonDisabled(true);
+          setDisplayShift("Shift");
+          setDatePicked(false);
+          changeDateRange(null);
+        }}
         disabled={buttonDisabled}
       />
       <Table

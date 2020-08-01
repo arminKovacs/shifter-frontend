@@ -26,6 +26,7 @@ export default function Shifts() {
   let [displayShift, setDisplayShift] = useState("Shift");
   let [datePicked, setDatePicked] = useState(false);
   let [buttonDisabled, setButtonDisabled] = useState(true);
+  let [dateRange, changeDateRange] = useState(null);
 
   const chooseWorker = (worker) => {
     setDisplayWorker(worker.firstName + " " + worker.lastName);
@@ -43,6 +44,10 @@ export default function Shifts() {
     shiftAssignmentDetails.startDate = dateStrings[0];
     shiftAssignmentDetails.endDate = dateStrings[1];
     setDatePicked(true);
+    changeDateRange([
+      moment(dateStrings[0], "YYYY-MM-DD"),
+      moment(dateStrings[1], "YYYY-MM-DD"),
+    ]);
   };
 
   let workersList = (
@@ -80,7 +85,7 @@ export default function Shifts() {
     return current && current < moment(today, "YYYY-MM-DD");
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const disableSubmitButton = () => {
       if (
         displayWorker !== "Choose a person" &&
@@ -90,8 +95,8 @@ export default function Shifts() {
         setButtonDisabled(false);
       }
     };
-    disableSubmitButton()
-  }, [displayShift, displayWorker, datePicked])
+    disableSubmitButton();
+  }, [displayShift, displayWorker, datePicked]);
 
   return (
     <div>
@@ -104,6 +109,7 @@ export default function Shifts() {
         className="work-time"
         onChange={dateChange}
         disabledDate={disabledDate}
+        value={dateRange}
       />
       <Dropdown overlay={shiftTypes} className="shift-dropdown">
         <Button>
@@ -115,7 +121,14 @@ export default function Shifts() {
         shape="circle"
         icon={<CheckOutlined />}
         className="check-button"
-        onClick={postShiftAssignment}
+        onClick={() => {
+          postShiftAssignment();
+          setButtonDisabled(true);
+          setDisplayWorker("Choose a person")
+          setDisplayShift("Shift");
+          setDatePicked(false);
+          changeDateRange(null);
+        }}
         disabled={buttonDisabled}
       />
       <Divider />
