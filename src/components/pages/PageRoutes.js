@@ -12,14 +12,14 @@ export default function PageRoutes() {
 
   return loginDetails !== "Logged in" ? (
     <Router>
-      <div className="pageBody">
+      <div className="login-body">
         <Route exact path="/" component={Signin} />
       </div>
     </Router>
   ) : (
     <Router>
       <NavBar />
-      <div className="pageBody">
+      <div className="page-body">
         <Route exact path="/" component={Shifts} />
         <Route path="/requests" component={Requests} />
       </div>

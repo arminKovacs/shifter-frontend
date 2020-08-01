@@ -21,11 +21,24 @@
   top: 0;
 }
 
-.pageBody {
+.page-body {
   max-width: 1400px;
   margin: auto;
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 10px;
   box-shadow: 5px 5px 13px #888888;
+}
+
+.login-body {
+  max-width: 1400px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  box-shadow: 5px 5px 13px #888888;
+}
+
+body{
+  height: auto;
 }
