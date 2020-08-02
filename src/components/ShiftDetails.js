@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ShiftDetailsContext } from "./context/ShiftDetailsContext";
-import { Modal, Divider } from "antd";
+import { LoginContext } from "./context/LoginContext";
+import { Modal, Divider, Button } from "antd";
 
 export default function ShiftDetails(props) {
   let {
@@ -13,6 +14,8 @@ export default function ShiftDetails(props) {
     shiftTimeRangeText,
   } = useContext(ShiftDetailsContext);
 
+  let { userData } = useContext(LoginContext);
+
   function handleOk() {
     setConfirmLoading(true);
     deleteEvent();
@@ -24,7 +27,7 @@ export default function ShiftDetails(props) {
     setVisible(false);
   }
 
-  return (
+  return userData.roles.includes("SUPERVISOR") ? (
     <Modal
       title="Shift details"
       visible={visible}
@@ -36,7 +39,24 @@ export default function ShiftDetails(props) {
       cancelText="Return"
     >
       <p>{modalText}</p>
-      <Divider/>
+      <Divider />
+      <p>{shiftTimeRangeText}</p>
+    </Modal>
+  ) : (
+    <Modal
+      title="Shift details"
+      visible={visible}
+      onOk={handleCancel}
+      confirmLoading={confirmLoading}
+      okText="Return"
+      footer={
+        <Button key="return" onClick={handleCancel}>
+          Return
+        </Button>
+      }
+    >
+      <p>{modalText}</p>
+      <Divider />
       <p>{shiftTimeRangeText}</p>
     </Modal>
   );
