@@ -1,19 +1,15 @@
 import "../../css/Form.css";
 import React, { useContext } from "react";
 import { Form, Input, Button, Row, Col, Divider } from "antd";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { LoginContext } from "../context/LoginContext";
 
 export default function Signin() {
+  let { sendLoginForm } = useContext(LoginContext);
+
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    sendLoginForm(values);
   };
-
-  let { setLoginDetails } = useContext(LoginContext);
-
-  function placeHolderLogin() {
-    setLoginDetails("Logged in");
-  }
 
   return (
     <Row id="starter-page">
@@ -23,14 +19,7 @@ export default function Signin() {
           <h1>Welcome to Shifter!</h1>
           <Divider />
           <div id="signin-logo"></div>
-          <Form
-            name="normal_login"
-            className="login-form"
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
-          >
+          <Form name="normal_login" className="login-form" onFinish={onFinish}>
             <Form.Item
               name="username"
               rules={[
@@ -55,18 +44,17 @@ export default function Signin() {
             >
               <Input type="password" placeholder="Password" />
             </Form.Item>
-            <Form.Item>
+            {/* <Form.Item>
               <Link className="login-form-forgot" to="/">
                 Forgot password
               </Link>
-            </Form.Item>
+            </Form.Item> */}
 
             <Form.Item>
               <Button
                 type="primary"
                 htmlType="submit"
                 className="login-form-button"
-                onClick={placeHolderLogin}
               >
                 Sign in
               </Button>

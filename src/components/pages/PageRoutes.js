@@ -8,9 +8,9 @@ import Requests from "./Requests";
 import { LoginContext } from "../context/LoginContext";
 
 export default function PageRoutes() {
-  let { loginDetails } = useContext(LoginContext);
+  let { userData } = useContext(LoginContext);
 
-  return loginDetails !== "Logged in" ? (
+  return userData === null ? (
     <Router>
       <div className="login-body">
         <Route exact path="/" component={Signin} />
