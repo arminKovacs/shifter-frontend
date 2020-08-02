@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ShiftContext } from "./context/ShiftContext";
 import { Modal, Divider, TimePicker, Input } from "antd";
 import { CirclePicker } from "react-color";
+import moment from "moment";
 
 export default function AddNewShift(props) {
   let {
@@ -12,13 +13,17 @@ export default function AddNewShift(props) {
     newShiftDetails,
     postNewShiftDetails,
   } = useContext(ShiftContext);
+  let [timeRange, setTimeRange] = useState(null);
+  let [inputValue, setInputValue] = useState(null);
 
   const { RangePicker } = TimePicker;
 
   function handleOk() {
     setConfirmLoading(true);
     postNewShiftDetails();
-    
+    setTimeRange(null);
+    setInputValue(null);
+    newShiftDetails.shiftColor = "";
     setVisible(false);
     setConfirmLoading(false);
   }
@@ -30,6 +35,10 @@ export default function AddNewShift(props) {
   function timeChange(value, timeStrings) {
     newShiftDetails.startTime = timeStrings[0];
     newShiftDetails.endTime = timeStrings[1];
+    setTimeRange([
+      moment(timeStrings[0], "HH:mm:ss"),
+      moment(timeStrings[1], "HH:mm:ss"),
+    ]);
   }
 
   return (
@@ -46,10 +55,12 @@ export default function AddNewShift(props) {
         placeholder="Shift name"
         onChange={(event) => {
           newShiftDetails.name = event.target.value;
+          setInputValue(event.target.value);
         }}
+        value={inputValue}
       />
       <Divider />
-      <RangePicker onChange={timeChange} />
+      <RangePicker onChange={timeChange} value={timeRange} />
       <Divider />
       <CirclePicker
         onChangeComplete={(color) => {

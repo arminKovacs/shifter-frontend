@@ -53,17 +53,15 @@ export default function Shifts() {
 
   let workersList = (
     <Menu>
-      {workers === undefined
-        ? "No workers added yet"
-        : workers.map((worker) => (
-            <Menu.Item
-              key={"worker" + worker.id}
-              icon={<UserOutlined />}
-              onClick={() => chooseWorker(worker)}
-            >
-              {worker.firstName + " " + worker.lastName}
-            </Menu.Item>
-          ))}
+      {workers.map((worker) => (
+        <Menu.Item
+          key={"worker" + worker.id}
+          icon={<UserOutlined />}
+          onClick={() => chooseWorker(worker)}
+        >
+          {worker.firstName + " " + worker.lastName}
+        </Menu.Item>
+      ))}
     </Menu>
   );
 
