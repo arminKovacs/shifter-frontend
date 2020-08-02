@@ -4,6 +4,7 @@ import DisplayCalendar from "../DisplayCalendar";
 import AddNewShift from "../AddNewShift";
 import { WorkerContext } from "../context/WorkerContext";
 import { ShiftContext } from "../context/ShiftContext";
+import { LoginContext } from "../context/LoginContext";
 import { AssignShiftContext } from "../context/AssignShiftContext";
 import { ShiftDetailsProvider } from "../context/ShiftDetailsContext";
 import { Menu, Dropdown, Button, Divider, DatePicker } from "antd";
@@ -18,6 +19,7 @@ import "../../css/Shifts.css";
 export default function Shifts() {
   const { RangePicker } = DatePicker;
   let { workers } = useContext(WorkerContext);
+  let { userData } = useContext(LoginContext);
   let { shifts, showModal } = useContext(ShiftContext);
   let { shiftAssignmentDetails, postShiftAssignment } = useContext(
     AssignShiftContext
@@ -101,7 +103,7 @@ export default function Shifts() {
     disableSubmitButton();
   }, [displayShift, displayWorker, datePicked]);
 
-  return (
+  return userData.roles.includes("SUPERVISOR") ? (
     <div>
       <Dropdown overlay={workersList} className="person-dropdown">
         <Button>
@@ -136,6 +138,12 @@ export default function Shifts() {
         disabled={buttonDisabled}
       />
       <Divider />
+      <ShiftDetailsProvider>
+        <DisplayCalendar />
+      </ShiftDetailsProvider>
+    </div>
+  ) : (
+    <div>
       <ShiftDetailsProvider>
         <DisplayCalendar />
       </ShiftDetailsProvider>

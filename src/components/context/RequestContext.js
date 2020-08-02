@@ -9,7 +9,7 @@ export const RequestContext = createContext();
 export function RequestProvider(props) {
   let [requests, setRequests] = useState([]);
   let [shiftRequestDetails, setShiftRequestDetails] = useState({
-    workerId: "6",
+    workerId: "",
     shiftId: "",
     startTime: "",
     endTime: "",
@@ -33,16 +33,14 @@ export function RequestProvider(props) {
 
   function postShiftRequests() {
     axios
-      .post(
-        "http://localhost:8080/shift-requests/" + shiftRequestDetails.workerId,
-        {
-          shiftId: shiftRequestDetails.shiftId,
-          startDate: shiftRequestDetails.startDate,
-          endDate: shiftRequestDetails.endDate,
-          startTime: shiftRequestDetails.startTime,
-          endTime: shiftRequestDetails.endTime,
-        }
-      )
+      .post("http://localhost:8080/shift-requests/", {
+        shifterUserId: userData.id,
+        shiftId: shiftRequestDetails.shiftId,
+        startDate: shiftRequestDetails.startDate,
+        endDate: shiftRequestDetails.endDate,
+        startTime: shiftRequestDetails.startTime,
+        endTime: shiftRequestDetails.endTime,
+      })
       .then((response) => {
         setRequests(response.data);
         message.success("Request sent");
@@ -62,16 +60,14 @@ export function RequestProvider(props) {
 
   function postShiftAssignment(shiftToAssign, requestId) {
     axios
-      .post(
-        "http://localhost:8080/worker-shifts/" + shiftToAssign.shifterUser.id,
-        {
-          shiftId: shiftToAssign.requestedShiftId,
-          startDate: shiftToAssign.startDate,
-          endDate: shiftToAssign.endDate,
-          startTime: shiftToAssign.startTime,
-          endTime: shiftToAssign.endTime,
-        }
-      )
+      .post("http://localhost:8080/worker-shifts/", {
+        shifterUserId: userData.id,
+        shiftId: shiftToAssign.requestedShiftId,
+        startDate: shiftToAssign.startDate,
+        endDate: shiftToAssign.endDate,
+        startTime: shiftToAssign.startTime,
+        endTime: shiftToAssign.endTime,
+      })
       .then((response) => {
         setWorkerShifts(response.data);
         deleteShiftRequest(requestId);

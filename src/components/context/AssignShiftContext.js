@@ -19,14 +19,15 @@ export const AssignShiftProvider = (props) => {
 
   const postShiftAssignment = () => {
     axios
-      .post("http://localhost:8080/worker-shifts/" + shiftAssignmentDetails.workerId, {
+      .post("http://localhost:8080/worker-shifts", {
+        shifterUserId: shiftAssignmentDetails.workerId,
         shiftId: shiftAssignmentDetails.shiftId,
         startDate: shiftAssignmentDetails.startDate,
         endDate: shiftAssignmentDetails.endDate,
         startTime: shiftAssignmentDetails.startTime,
         endTime: shiftAssignmentDetails.endTime,
       })
-      .then(response => {
+      .then((response) => {
         setWorkerShifts(response.data);
         message.success("Shift assigned");
       })
