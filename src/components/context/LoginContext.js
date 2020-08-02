@@ -21,8 +21,17 @@ export function LoginProvider(props) {
       });
   }
 
+  function logout() {
+    axios.defaults.withCredentials = true;
+    axios.post("http://localhost:8080/logout/", {
+      withCredentials: true,
+    });
+  }
+
   return (
-    <LoginContext.Provider value={{ userData, sendLoginForm }}>
+    <LoginContext.Provider
+      value={{ userData, setUserData, sendLoginForm, logout }}
+    >
       {props.children}
     </LoginContext.Provider>
   );
