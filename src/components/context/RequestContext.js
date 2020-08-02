@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect, useContext } from "react";
 import { WorkerShiftContext } from "./WorkerShiftContext";
+import { LoginContext } from "./LoginContext";
 import { message } from "antd";
 import axios from "axios";
 
@@ -16,15 +17,16 @@ export function RequestProvider(props) {
     endDate: "",
   });
   let { setWorkerShifts } = useContext(WorkerShiftContext);
+  let { userData } = useContext(LoginContext);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/shift-requests/").then((response) => {
+    axios.get("http://localhost:8080/shift-requests").then((response) => {
       setRequests(response.data);
     });
-  }, []);
+  }, [userData]);
 
   function getShiftRequests() {
-    axios.get("http://localhost:8080/shift-requests/").then((response) => {
+    axios.get("http://localhost:8080/shift-requests").then((response) => {
       setRequests(response.data);
     });
   }

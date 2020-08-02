@@ -12,6 +12,7 @@ export default function RightMenu(props) {
     <Menu mode={modeState} selectedKeys={0}>
       <Menu.Item key="logout" component={Link} onClick={closeDrawer}>
         <Link
+          to="/"
           onClick={() => {
             setUserData(null);
             logout();

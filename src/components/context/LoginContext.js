@@ -23,7 +23,7 @@ export function LoginProvider(props) {
 
   function logout() {
     axios.defaults.withCredentials = true;
-    axios.post("http://localhost:8080/logout/", {
+    axios.post("http://localhost:8080/logout", {
       withCredentials: true,
     });
   }

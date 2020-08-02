@@ -1,4 +1,5 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
+import { LoginContext } from "./LoginContext";
 import axios from "axios";
 import { message } from "antd";
 
@@ -14,16 +15,17 @@ export const ShiftProvider = (props) => {
     endTime: "",
     shiftColor: "",
   });
+  let { userData } = useContext(LoginContext);
 
   function showModal() {
     setVisible(true);
   }
 
-  useEffect((shifts) => {
+  useEffect(() => {
     axios.get("http://localhost:8080/shifts").then((response) => {
       setShifts(response.data);
     });
-  }, []);
+  }, [userData]);
 
   function postNewShiftDetails() {
     axios
@@ -41,13 +43,13 @@ export const ShiftProvider = (props) => {
         if (error.response.data.name) {
           message.error(error.response.data.name);
         }
-        if (error.response.data.startTime){
+        if (error.response.data.startTime) {
           message.error(error.response.data.startTime);
         }
-        if (error.response.data.endTime){
+        if (error.response.data.endTime) {
           message.error(error.response.data.endTime);
         }
-        if (error.response.data.shiftColor){
+        if (error.response.data.shiftColor) {
           message.error(error.response.data.shiftColor);
         }
       });
