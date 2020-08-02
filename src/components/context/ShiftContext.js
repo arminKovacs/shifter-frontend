@@ -37,7 +37,20 @@ export const ShiftProvider = (props) => {
         setShifts(response.data);
         message.success("New shift created");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        if (error.response.data.name) {
+          message.error(error.response.data.name);
+        }
+        if (error.response.data.startTime){
+          message.error(error.response.data.startTime);
+        }
+        if (error.response.data.endTime){
+          message.error(error.response.data.endTime);
+        }
+        if (error.response.data.shiftColor){
+          message.error(error.response.data.shiftColor);
+        }
+      });
   }
 
   return (
