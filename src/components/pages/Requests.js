@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import moment from "moment";
 import { RequestContext } from "../context/RequestContext";
 import { ShiftContext } from "../context/ShiftContext";
+import { LoginContext } from "../context/LoginContext";
 import { Table, Space, Button, Menu, Dropdown, DatePicker } from "antd";
 import {
   DownOutlined,
@@ -21,6 +22,7 @@ export default function Requests() {
     postShiftAssignment,
   } = useContext(RequestContext);
   let { shifts } = useContext(ShiftContext);
+  let { userData } = useContext(LoginContext);
   let [displayShift, setDisplayShift] = useState("Shift");
   let [datePicked, setDatePicked] = useState(false);
   let [buttonDisabled, setButtonDisabled] = useState(true);
@@ -130,7 +132,7 @@ export default function Requests() {
     },
   ];
 
-  return (
+  return userData.roles.includes("SUPERVISOR") ? (
     <div>
       <Dropdown overlay={shiftTypes} className="shift-dropdown">
         <Button>
@@ -159,6 +161,40 @@ export default function Requests() {
       />
       <Table
         dataSource={dataSource}
+        columns={columns}
+        scroll={{ x: "max-content" }}
+        pagination={{ pageSize: 5 }}
+      />
+    </div>
+  ) : (
+    <div>
+      <Dropdown overlay={shiftTypes} className="shift-dropdown">
+        <Button>
+          {displayShift} <DownOutlined />
+        </Button>
+      </Dropdown>
+      <RangePicker
+        className="work-time"
+        onChange={dateChange}
+        disabledDate={disabledDate}
+        value={dateRange}
+      />
+      <Button
+        type="primary"
+        shape="circle"
+        icon={<CheckOutlined />}
+        className="check-button"
+        onClick={() => {
+          postShiftRequests();
+          setButtonDisabled(true);
+          setDisplayShift("Shift");
+          setDatePicked(false);
+          changeDateRange(null);
+        }}
+        disabled={buttonDisabled}
+      />
+      <Table
+        //dataSource={dataSource}
         columns={columns}
         scroll={{ x: "max-content" }}
         pagination={{ pageSize: 5 }}
